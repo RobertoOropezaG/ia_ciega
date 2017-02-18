@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Detalles de implementacion</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1><a class="anchor" name="detalles">Detalles de implementacion</a></h1>En esta página se explican detalles útiles solamente a aquellos que quieran modificar o mejorar esta librería, o quienes esten interesados en sus detalles.<p>
+Se supone un conocimiento práctico de los contenedores estandar de C++ (parte de la STL) y una lectura al resto de este documento, especialmente la seccion Rationale.<p>
+La librería esta dividida en tres partes conceptuales: la interfaz, los algoritmos y los auxiliares (tanto estructuras de datos como funciones).<p>
+<ol>
+<li>
+La <b>interfaz</b> comprende todo aquello a lo que el programador usuario puede acceder, esto es, funciones y tipos que se encuentran en el namespace <a class="el" href="namespaceia.html">ia</a>, se puede usar todas las capacidades de esta libreria con solo ese conocimiento. Pertenecen a esta parte <a class="el" href="group__algoritmos.html#gb77ee36cd0863098b3ea21168341acfc">ia::profundidad_limitada_doble</a>, <a class="el" href="group__algoritmos.html#g4e950218e635de0baf0e635bc0d1acef">ia::profundidad_iterativa</a>, <a class="el" href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e">ia::mostrar_solucion</a>, el tipo <a class="el" href="structia_1_1_operacion.html">ia::Operacion</a>, etc.<p>
+</li>
+<li>
+Los <b>algoritmos</b> se encuentran ocultos en el namespace <a class="el" href="namespaceia_1_1detalle.html">ia::detalle</a> y hay uno por cada método de búsqueda que aparece en la interfaz. Pertenecen a esta parte <a class="el" href="group__detalle__implementacion.html#gd52da0628461fbda96aac48a75f29122">ia::detalle::profundidad_limitada_doble</a>, <a class="el" href="group__algoritmos.html#g4e950218e635de0baf0e635bc0d1acef">ia::detalle::profundidad_iterativa</a><p>
+</li>
+<li>
+Los <b>auxiliares</b> tambien estan en el namespace <a class="el" href="namespaceia_1_1detalle.html">ia::detalle</a> y son utilizados tanto por los algoritmos como por la interfaz. Tenga en cuenta que en el resto de este documento se ha usado el término auxiliares haciendo referencia a ciertas funciones/tipos de la <em>interfaz</em> que no pertenecen a esta categoría conceptual. </li>
+</ol>
+<h2><a class="anchor" name="detalle_interfaz">
+Detalles sobre la interfaz</a></h2>
+El uso de la interfaz se ha explicado en el resto de este documento, aquí se explica cómo esta implementada.<p>
+Las funciones de búsqueda de la interfaz tienen el propósito de que los algoritmos reciban la menor cantidad de parámetros posibles, y permitir que el compilador elija el tipo de los parámetros de plantilla necesarios, así como a adaptar las llamadas de acuerdo a la macro IA_NO_REGISTRAR_SOLUCION.<p>
+Tómese el código de la funcion de interfaz preferencia_amplitud como ejemplo <div class="fragment"><pre class="fragment"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Estado_t, <span class="keyword">typename</span> Operaciones_t&gt;
+vector&lt; typename Operaciones_t::value_type&gt; <a class="code" href="group__detalle__implementacion.html#g146585979cd3482b56bb8ed8aadcdcd7">preferencia_amplitud</a>(<span class="keyword">const</span> Operaciones_t&amp; operaciones
+            , <span class="keyword">const</span> Estado_t&amp; inicial 
+            , <span class="keywordtype">bool</span>(*registrar_solucion)( <span class="keyword">const</span> vector&lt;typename Operaciones_t::value_type&gt;&amp; 
+                                        ,<span class="keyword">const</span> Estado_t&amp; ) = NULL ) {
+   <span class="keyword">typedef</span> vector&lt; typename Operaciones_t::value_type &gt; Ruta_t;
+   <a class="code" href="ia__ciega_8h.html#2ed87f010933dea8539d11d5b298021a">IA_REINICIAR_ESTADISTICAS</a>;
+   detalle::EstadoYRuta&lt;Estado_t, Operaciones_t&gt; principio;
+   principio.push_back( make_pair( inicial, Ruta_t() ) );
+   
+   <a class="code" href="ia__ciega_8h.html#75123461572925fe75a7797d9930f1ff">IA_INICIO_CRONOMETRO</a>;
+</pre></div><p>
+En esas lineas, en base a los parámetros recibidos se inicializan las variables requeridas por las funciones de algoritmos, se inician los contadores estadísticos y el cronometraje<p>
+<div class="fragment"><pre class="fragment">   <span class="keywordflow">if</span> ( inicial.es_meta() ) {<span class="comment">// El algoritmo interno no verifica que el estado inicial sea el estado meta</span>
+      <a class="code" href="group__detalle__implementacion.html#g2ca880b75037a67e30bc43fac3a2d7f8">IA_IF_DEVUELVE_FALSO_REGISTRAR_SOLUCION</a>( Ruta_t(), inicial )
+         ; <span class="comment">// no-operacion</span>
+      <span class="keywordflow">return</span> vector&lt;typename Operaciones_t::value_type&gt;();
+   }
+</pre></div> La macro IA_IF_DEVUELVE_FALSO_REGISTRAR_SOLUCION ejecuta a la funcion apuntada por registrar_solucion si esto esta habilitado, de otra forma no hace nada.<p>
+En caso de que el estado inicial sea el estado meta, y el algoritmo interno no revise esta situacion con el estado inicial, son las funciones de la interfaz las que se encargan de llamar a la funcion registrar_solucion, como se ve en el ejemplo.<p>
+<div class="fragment"><pre class="fragment">   Ruta_t solucion = detalle::preferencia_amplitud&lt;Estado_t, Operaciones_t&gt;(operaciones, principio
+<span class="preprocessor">#ifndef IA_NO_REGISTRAR_SOLUCION</span>
+<span class="preprocessor"></span>                                                         , registrar_solucion
+<span class="preprocessor">#endif</span>
+<span class="preprocessor"></span>                                                         );
+   <a class="code" href="ia__ciega_8h.html#7069a221044d02e36ba170bb4d9f9f93">IA_FIN_CRONOMETRO</a>;
+   <span class="keywordflow">return</span> solucion;
+}
+</pre></div><p>
+finalmente llama a la función de algoritmo interna con los parámetros que ella requiere, usando al preprocesador envian el parámetro registrar_solucion solamente si no esta definida la macro IA_NO_REGISTRAR_SOLUCION. Termina por devolver lo mismo que la función interna.<h2><a class="anchor" name="detalle_algoritmo">
+Detalles sobre la implementación</a></h2>
+Siempre se ha minimizado el uso de variables locales en los algoritmos recursivos.<p>
+Internamente se utiliza el contenedor vector&lt;&gt; para almacenar datos que no se necesita ordenar, porque todas las inserciones y borrados se realizan al final y en esto es el más eficiente, salvo cuando se necesita aumentar su capacidad interna, sin embargo esto ocurre rara vez. La otra alternativa hubiera sido el uso de list, pero internamente es una lista <em>doblemente</em> enlazada lo cual hace que las inserciones y eliminaciones sean más lentas que en un vector. (Los vectores de la STL cambian de tamaño dinámicamente pero no se encuentran en el heap). Se utilizan set y multiset cuando se necesita que los elementos esten ordenados.<p>
+Es un hecho que un código eficiente en memoria o tiempo tiende a ser menos legible, se ha intentado mejorar la legibilidad a lo largo de la libreria, sin embargo sí se han usado ciertas expresiones que ameritan explicación:<p>
+Una técnica usada a lo largo de la librería para evitar el copiado de datos de contenedores es la siguiente, en vez de hacer<div class="fragment"><pre class="fragment"> contenedor1 = contenedor2; 
+</pre></div> se ha utilizado el método swap de uno de los contenedores, de esta manera<div class="fragment"><pre class="fragment"> contenedor1.swap( contenedor2 ); 
+</pre></div> esto es menos legible y puede parecer menos eficiente ya que equivaldría a:<div class="fragment"><pre class="fragment"> aux = contenedor1;
+ contenedor1 = contenedor2;
+ contenedor2 = aux; 
+</pre></div> Sin embargo la especificación de la STL indica que lo que en realidad se intercambia con el método swap no son los elementos de los contenedores, sino simplemente los iteradores de principio y fin de ambos (es decir seis asignaciones de tipos atómicos en vez de copiar todos los elementos de un contenedor a otro). El hecho de que el segundo contenedor quede con los datos del primero resulta ser irrelevante debido a que no se vuelve a utilizar tal contenedor en los algoritmos, o porque lo que corresponde, en los algoritmos, es vaciarlo. La alternativa hubiera implicado: 1) que en algun momento se hubiera tenido una copia de un contenedor, ocupando el doble de memoria de la requerida. 2) se hubiera requerido que los estados necesiten un copy-constructor.<p>
+Esta otra expresión tampoco es muy clara, se usa para ejecutar una operacion a un estado para obtener el estado sucesor:<div class="fragment"><pre class="fragment"> <span class="keywordflow">if</span> ( ! (*(*operacion))(estado, resultante) )
+    ...; 
+</pre></div> Esto es lo que hace posible que la misma función funcione con functores y funciones, en el caso de un contenedor de punteros a funciones implica la dereferencia de un iterador (llamado 'operacion'), de un puntero a función y la llamada a la función apuntada, en el caso de un contenedor de punteros a functores implica la dereferencia de ese mismo iterador, de un puntero a un objeto y la llamada al <code>operator()</code> del objeto apuntado. En ambos casos la negacion implica que el cuerpo del <code>if</code> se ejecutará si NO es posible realizar la operación en el estado dado, en caso contrario el estado resultante estará almacenado en <code>resultante</code>.<p>
+Esta otra expresion se usa para notificar a la funcion callback de una solucion hallada:<div class="fragment"><pre class="fragment"> <span class="keywordflow">if</span> ( ! registrar_solucion || ! (*registrar_solucion)(ruta, actual) )
+    ...; 
+</pre></div> Aprovechamos el short-circuit de las expresiones booleanas de C++ para invocar al callback solamente si no es nulo y realizar el cuerpo del if solamente si no había funcion callback o habiendo sido ejecutada devolvió falso. <h2><a class="anchor" name="estilo">
+Una nota sobre el estilo</a></h2>
+El código fuente debe ser legible. Muchas lineas de código exceden el ancho de la pantalla (o de la página) se ha preferido cortar las lineas bajo esta premisa básica: una linea que lógicamente debería ser parte de la anterior SIEMPRE empezará con un símbolo de puntuación. Aunque esto no es lo que más a menudo se usa en otros programas, ayuda mucho a entender rápidamente el código, comparese este pedazo de código, que sigue el esquéma típico (no usado en esta librería):<div class="fragment"><pre class="fragment">  <span class="keyword">template</span> &lt; <span class="keyword">typename</span> Estado_t, <span class="keyword">typename</span> Operaciones_t&gt;
+  vector&lt; typename Operaciones_t::value_type&gt; <a class="code" href="group__detalle__implementacion.html#gc576de7ced520b771831a409bc671363">profundidad_limitada</a>(<span class="keyword">const</span> Operaciones_t&amp; operaciones, 
+      <span class="keyword">const</span> Estado_t&amp; inicial, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&amp; limite_profundidad, <span class="keywordtype">bool</span>(*registrar_solucion) ( 
+      <span class="keyword">const</span> vector&lt;typename Operaciones_t::value_type&gt;&amp;, <span class="keyword">const</span> Estado_t&amp; ) = NULL )  
+   {
+      <a class="code" href="ia__ciega_8h.html#2ed87f010933dea8539d11d5b298021a">IA_REINICIAR_ESTADISTICAS</a>;
+      set&lt;Estado_t&gt; visitados;
+      visitados.insert( inicial );
+      ... 
+   }
+</pre></div> con el mísmo código siguiendo el esquema usado en esta librería<div class="fragment"><pre class="fragment">  <span class="keyword">template</span> &lt; <span class="keyword">typename</span> Estado_t, <span class="keyword">typename</span> Operaciones_t&gt;
+  vector&lt; typename Operaciones_t::value_type&gt; <a class="code" href="group__detalle__implementacion.html#gc576de7ced520b771831a409bc671363">profundidad_limitada</a>(<span class="keyword">const</span> Operaciones_t&amp; operaciones
+               , <span class="keyword">const</span> Estado_t&amp; inicial
+               , <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&amp; limite_profundidad
+               , <span class="keywordtype">bool</span>(*registrar_solucion)( <span class="keyword">const</span> vector&lt;typename Operaciones_t::value_type&gt;&amp;
+                                          , <span class="keyword">const</span> Estado_t&amp; ) = NULL ) {
+      <a class="code" href="ia__ciega_8h.html#2ed87f010933dea8539d11d5b298021a">IA_REINICIAR_ESTADISTICAS</a>;
+      set&lt;Estado_t&gt; visitados;
+      visitados.insert( inicial ); 
+   ...
+   }
+</pre></div> En el de más abajo resulta evidente que los parámetros de tipo const vector&lt;&gt;&amp; y const Estado corresponden a la funcion recibida <code>registrar_solucion</code>, en el de más arriba darse cuenta de eso requiere un análisis de las lineas anteriores. El mismo caso se presenta en las sentencias for:<div class="fragment"><pre class="fragment">   <span class="keywordflow">for</span>( <span class="keyword">typename</span> Operaciones_t::const_iterator paso = solucion.begin(); paso != solucion.end();
+        ++ paso)
+       anterior = actual;
+   actual = X; 
+</pre></div><p>
+¿ ++paso era parte del cuerpo del for?, aquí se ve mas claramente que ++paso no es el cuerpo del for, especialmente por el punto y coma:<div class="fragment"><pre class="fragment">   <span class="keywordflow">for</span>( <span class="keyword">typename</span> Operaciones_t::const_iterator paso = solucion.begin(); paso != solucion.end()
+                                                                      ; ++ paso)
+       anterior = actual;
+   actual = X; 
+</pre></div> <hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:38 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

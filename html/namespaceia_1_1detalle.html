@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Referencia del Namespace ia::detalle</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li id="current"><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<div class="tabs">
+  <ul>
+    <li><a href="namespaces.html"><span>Lista de namespace</span></a></li>
+    <li><a href="namespacemembers.html"><span>Miembros&nbsp;del&nbsp;Namespace&nbsp;</span></a></li>
+  </ul></div>
+<div class="nav">
+<a class="el" href="namespaceia.html">ia</a>::<a class="el" href="namespaceia_1_1detalle.html">detalle</a></div>
+<h1>Referencia del Namespace ia::detalle<br>
+<small>
+[<a class="el" href="group__detalle__implementacion.html">Detalles de implementación</a>]</small>
+</h1><hr><a name="_details"></a><h2>Descripción detallada</h2>
+Contiene detalles de implementación y la implementacion de los algoritmos de IA. 
+<p>
+Para usar los algoritmos de búsqueda use una de las funciones de interfaz que están en el namespace ia <dl compact><dt><b>Ver también:</b></dt><dd><a class="el" href="namespaceia.html">ia</a> </dd></dl>
+
+<p>
+
+<p>
+
+<p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Clases</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_estado_y_ruta.html">EstadoYRuta</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Alias para contener varios estados cada uno con las operaciones realizadas para llegar a él (o sea, su ruta).  <a href="structia_1_1detalle_1_1_estado_y_ruta.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_set_estado_y_ruta.html">SetEstadoYRuta</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Alias para tener varios estados ordenados de acuerdo a cierto criterio (dado por Comparador_t), cada uno asociado con las operaciones realizadas para llegar a él (o sea, su ruta).  <a href="structia_1_1detalle_1_1_set_estado_y_ruta.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_multiset_estado_y_ruta.html">MultisetEstadoYRuta</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Alias para tener varios estados ordenados de acuerdo a cierto criterio (dado por Comparador_mejor_t), cada uno asociado con las operaciones realizadas para llegar a él (o sea, su ruta).  <a href="structia_1_1detalle_1_1_multiset_estado_y_ruta.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_compara_estados_ignorando_rutas.html">ComparaEstadosIgnorandoRutas</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Functor auxiliar que compara un par &lt;estado, ruta&gt; tomando en cuenta solamente el estado.  <a href="structia_1_1detalle_1_1_compara_estados_ignorando_rutas.html#_details">Más...</a><br></td></tr>
+<tr><td colspan="2"><br><h2>Funciones</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="eb959eaf0956ad7e5e79e6e8a0ca4ceb"></a><!-- doxytag: member="ia::detalle::reiniciar_estadisticas" ref="eb959eaf0956ad7e5e79e6e8a0ca4ceb" args="()" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceia_1_1detalle.html#eb959eaf0956ad7e5e79e6e8a0ca4ceb">reiniciar_estadisticas</a> ()</td></tr>
+
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; typename Operaciones_t::value_type &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#g146585979cd3482b56bb8ed8aadcdcd7">preferencia_amplitud</a> (const Operaciones_t &amp;operaciones, <a class="el" href="structia_1_1detalle_1_1_estado_y_ruta.html">detalle::EstadoYRuta</a>&lt; Estado_t, Operaciones_t &gt; &amp;expansibles, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algorítmo de búsqueda por amplitud, no es recursivo.  <a href="group__detalle__implementacion.html#g146585979cd3482b56bb8ed8aadcdcd7"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">Ruta_t&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#ga81bb2a346107cbfe5debe839f71e5d8">preferencia_profundidad</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, bool &amp;finalizar, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por profundidad, es recursivo.  <a href="group__detalle__implementacion.html#ga81bb2a346107cbfe5debe839f71e5d8"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">Ruta_t&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#gc576de7ced520b771831a409bc671363">profundidad_limitada</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, const unsigned int &amp;limite_profundidad, bool &amp;finalizar, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por profundidad limitada, es recursivo pero solo tiene una variable Estado_t en el stack, el resto son estáticas.  <a href="group__detalle__implementacion.html#gc576de7ced520b771831a409bc671363"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t, typename Comparador_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">pair&lt; Ruta_t, bool &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#gd52da0628461fbda96aac48a75f29122">profundidad_limitada_doble</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, const unsigned int &amp;limite_profundidad, bool &amp;finalizar, <a class="el" href="structia_1_1detalle_1_1_set_estado_y_ruta.html">SetEstadoYRuta</a>&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;atajos, <a class="el" href="structia_1_1detalle_1_1_set_estado_y_ruta.html">SetEstadoYRuta</a>&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;nuevos_atajos, bool(*registrar_solucion)(vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por profundidad limitada doble, es recursivo pero solo tiene una variable Estado_t en el stack, el resto son estáticas.  <a href="group__detalle__implementacion.html#gd52da0628461fbda96aac48a75f29122"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Comparador_mejor_t, typename Ruta_t, typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">Ruta_t&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#ge15de63db4b071b0a2e2d1b7b221eefb">primero_mejor</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, <a class="el" href="structia_1_1detalle_1_1_multiset_estado_y_ruta.html">detalle::MultisetEstadoYRuta</a>&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt; &amp;expansibles, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por primero el mejor (A*), no es recursivo.  <a href="group__detalle__implementacion.html#ge15de63db4b071b0a2e2d1b7b221eefb"></a><br></td></tr>
+</table>
+<hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:38 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

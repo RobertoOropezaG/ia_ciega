@@ -1,0 +1,11 @@
+#include <map>
+
+using namespace std;
+
+struct Pais {
+};
+
+typedef map<Pais, map< Iterador, Costo > >::iterator Iterador;
+
+int main() {
+}

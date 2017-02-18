@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Documentación de IA Ciega</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li id="current"><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1>Documentación de IA Ciega</h1>
+<p>
+<h3 align="center">Roberto Oropeza Gamarra </h3>El objetivo de esta libreria es facilitar el uso de los Algoritmos de Búsqueda usados en Inteligencia Artificial de manera que una vez que se tengan definidos los estados y las operaciones sea sencillo probar los distintos algoritmos sin tener que implementarlos.<h2><a class="anchor" name="intro">
+Introducción</a></h2>
+La librería esta diseñada para permitir un uso sencillo sin sacrificar la flexibilidad. Se han usado plantillas, pero para llamar a las funciones no es necesario especificar los tipos de las plantillas, excepto en <code>primero_mejor</code>.<p>
+La corrida debería ser muy rápida porque siempre que es posible uso parámetros por referencia, ademas, me apoyo en la STL y plantillas para los algorítmos y contenedores necesarios.<h2><a class="anchor" name="uso">
+Modo de uso</a></h2>
+Para traer todas las funciones al scope de trabajo, evitando poner ia::... a cada rato, puedes poner: <div class="fragment"><pre class="fragment"> <span class="keyword">using namespace </span>ia;
+</pre></div> al principio de tu programa, después de incluir las cabeceras que necesites.<p>
+Para una visión general de la libreria ve las pestañas Páginas relacionadas, Módulos, y Ejemplos, Cuando estes dispuesto a usar la librería mirá el <a class="el" href="uso_general.html">Uso general</a> y luego alguno de los <a class="el" href="group__algoritmos.html">Algoritmos de búsqueda en espacios de estados</a>, tambien mirá los <a class="el" href="consejos.html">Consejos prácticos</a>. Recuerda ver los ejemplos para ver el uso práctico y ante cualquier duda, el más sencillo es el pastor.cpp, los mas complejos el 8puzzle.cpp y reinas.cpp.<h2><a class="anchor" name="compatibilidad">
+Compatibilidad y compilación</a></h2>
+Esta librería consiste solo de un archivo cabecera: <a class="el" href="ia__ciega_8h.html">ia_ciega.h</a>, así que no requiere compilación de librería. Se usa intensivamente la STL y plantillas, pero no se usa meta-programación, así que cualquier C++ contemporaneo debería ser suficiente. Se ha probado con éxito usando: <ul>
+<li>
+Bloodshed Dev-Cpp 4.9.9.2 [=g++ (GCC) 3.4.2 (mingw-special)] </li>
+<li>
+Borland CBuilder 6 Update Pack 4 [=Borland C++ 5.6.4] </li>
+<li>
+Borland CBuilder 2006 Update Pack 2 [=Borland C++ 5.8.2] </li>
+<li>
+Borland free C++Builder 5 Command Line Tools [=Borland C++ 5.5.1] </li>
+<li>
+Digital Mars 8.4.8 [=Digital Mars Compiler 8.42n] </li>
+<li>
+Microsoft C++ de VisualStudio .NET 2003 y Visual C++ Toolkit 2003 [=Microsoft C/C++ 13.10.3077] </li>
+<li>
+Microsoft C++ de VisualStudio 2005 [=Microsoft 32-bit C/C++ Optimizing Compiler 14.00.50727.42 for 80x86] </li>
+</ul>
+<p>
+El uso con los compilador de Microsoft Visual C++ Toolkit/VisualStudio .NET 2003 es posible solamente si se especifican los tipos de las plantillas al momento de llamar a las funciones, como se ve en los ejemplos. Esta incompatibilidad ha sido solucionada en MS VS 2005.<p>
+En el caso del compilador gratuito (MS VC++ Toolkit) no será posible usar el cronometraje automático porque tal herramienta no incluye windows.h.<p>
+No se puede usar con: <ul>
+<li>
+Borland C++ 7.0 para DOS </li>
+<li>
+DJGPP </li>
+</ul>
+Son todos los compiladores con los que se ha probado, si alguno no esta en la lista significa que todavía no se ha probado y que podría funcionar. <h2><a class="anchor" name="instalacion">
+Instalación</a></h2>
+La instalación es solamente copiar el archivo <a class="el" href="ia__ciega_8h.html">ia_ciega.h</a> a una carpeta donde la encuentre el compilador, esa carpeta suele llamarse "include".<h2><a class="anchor" name="limitaciones">
+Características y Limitaciones</a></h2>
+<ul>
+<li>
+<b>Reentrancia: </b> En una aplicacion con más de un hilo debe evitar que el <em>mismo tipo de búsqueda (o sea la misma función de búsqueda con los mismos parámetros de plantilla)</em> este siendo realizado por dos hilos a la vez, debe considerarse también el mismo tipo de búsqueda a profundidad_limitada y profundidad_iterativa. Si se busca con las mismas funciones pero con diferentes parametros de plantilla no hay problemas de reentrancia. </li>
+<li>
+La capacidad de cronometrar la ejecucion solo es posible en plataforma MS Windows, en otras debe deshabilitarse con #define IA_NO_CRONOMETRAR </li>
+<li>
+Actualmente solo se ha compilado en plataforma MS Widnows, pero debe poderse en otras ya que no se usan características específicas de ese sistema (salvo en el cronometraje). </li>
+</ul>
+<h2><a class="anchor" name="Pendientes">
+Pendientes</a></h2>
+<ul>
+<li>
+Crear contenedores con características adicionales para esta libreria, como ser secuencias con allocators para memoria paginada en disco (con eso sería posible su uso en búsquedas en espacios inmensos) </li>
+<li>
+Hacer una comparación estadística práctica con otras librerias de búsqueda, tanto en tiempo como en memoria. </li>
+<li>
+Implementar otros algorítmos de búsqueda </li>
+</ul>
+<hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:37 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

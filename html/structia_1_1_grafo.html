@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Referencia de la Estructura ia::Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt;</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li id="current"><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<div class="tabs">
+  <ul>
+    <li><a href="annotated.html"><span>Lista&nbsp;de&nbsp;componentes</span></a></li>
+    <li><a href="hierarchy.html"><span>Jerarquía&nbsp;de&nbsp;la&nbsp;clase</span></a></li>
+    <li><a href="functions.html"><span>Miembros&nbsp;de&nbsp;las&nbsp;clases</span></a></li>
+  </ul></div>
+<div class="nav">
+<a class="el" href="namespaceia.html">ia</a>::<a class="el" href="structia_1_1_grafo.html">Grafo</a></div>
+<h1>Referencia de la Estructura ia::Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt;<br>
+<small>
+[<a class="el" href="group__grafos.html">Búsquedas en grafos</a>]</small>
+</h1><!-- doxytag: class="ia::Grafo" --><!-- doxytag: inherits="std::map&lt; Nodo_t, Enlaces&lt; Nodo_t, Iterador_t, Costo_t &gt; &gt;" --><code>#include &lt;<a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>&gt;</code>
+<p>
+Herencias std::map&lt; Nodo_t, Enlaces&lt; Nodo_t, Iterador_t, Costo_t &gt; &gt;.
+<p>
+<a href="structia_1_1_grafo-members.html">Lista de todos los miembros.</a><hr><a name="_details"></a><h2>Descripción detallada</h2>
+<h3>template&lt;typename Nodo_t, typename Iterador_t, typename Costo_t = int&gt;<br>
+ struct ia::Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt;</h3>
+
+La estructura del grafo. 
+<p>
+Internamente se almacena como un mapa de nodos, cada uno asociado a sus enlaces, de tipo <a class="el" href="structia_1_1_enlaces.html">Enlaces</a>. Los parametros de plantilla son estos: <dl compact><dt><b>Parámetros:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>Nodo_t</em>&nbsp;</td><td>Es el tipo del nodo o vértice con el que el grafo debe funcionar. Es un tipo creado por el usuario de la librería para su propio dominio de problema </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>Iterador_t</em>&nbsp;</td><td>Es el tipo de iterador utilizado por el grafo. Debe ser especificado por el usuario como se indica más abajo </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>Costo_t</em>&nbsp;</td><td>Es el tipo del costo de cada enlace, por defecto es un entero (int) </td></tr>
+  </table>
+</dl>
+
+<p>
+
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00976">976</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Tipos públicos</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="3bc9cd541cbe31b83f70a00f95639456"></a><!-- doxytag: member="ia::Grafo::Enlaces_t" ref="3bc9cd541cbe31b83f70a00f95639456" args="" -->
+typedef <a class="el" href="structia_1_1_enlaces.html">Enlaces</a>&lt; Nodo_t, Iterador_t,<br>
+ Costo_t &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_grafo.html#3bc9cd541cbe31b83f70a00f95639456">Enlaces_t</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Un valor de este tipo esta asociado a cada nodo y permite acceder a sus vecinos y conocer los valores asociados al enlace (costo). <br></td></tr>
+<tr><td colspan="2"><br><h2>Métodos públicos</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="fc5e3c771bcd0200dfbbd7619c361d46"></a><!-- doxytag: member="ia::Grafo::operator[]" ref="fc5e3c771bcd0200dfbbd7619c361d46" args="(const Nodo_t &amp;origen)" -->
+<a class="el" href="structia_1_1_grafo.html#3bc9cd541cbe31b83f70a00f95639456">Enlaces_t</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_grafo.html#fc5e3c771bcd0200dfbbd7619c361d46">operator[]</a> (const Nodo_t &amp;origen)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">El operator[] permite acceder a los enlaces de un nodo de manera intuitiva. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="09489a9977c19f7e01be7230ed04eae8"></a><!-- doxytag: member="ia::Grafo::~Grafo" ref="09489a9977c19f7e01be7230ed04eae8" args="()" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_grafo.html#09489a9977c19f7e01be7230ed04eae8">~Grafo</a> ()</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">El destructor libera recursos utilizados internamente: elimina los punteros a los iteradores que se crearon en los enlaces. <br></td></tr>
+</table>
+<hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:38 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

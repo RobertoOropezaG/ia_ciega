@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: 8puzzle.cpp</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1>8puzzle.cpp</h1>Usa functores (objetos-función) para especificar las operaciones sobre los estados. Cada movimiento (operacion) es una instancia de la clase Mover.<p>
+Ademas de usar <code>vector</code> y <code>map</code> y <code>set</code> de la STL (<code>set</code> es un conjunto ordenado en que no pueden repetirse los elementos) usa los algoritmos <code>lexicographical_compare</code> que compara dos contenedores a modo de diccionario, es decir que si ambos son identicos solo que uno de los contenedores tiene menos elementos, este está primero. Tambien se usan <code>copy</code> y <code>back_inserter</code> que juntos añaden el contenido del primer contenedor al final del segundo. <code>random_shuffle</code> desordena de manera aleatoria todo el contenido de un contenedor.<p>
+Utiliza la búsqueda de profundidad limitada<p>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/* Resuelve el 8-puzzle</span>
+<a name="l00002"></a>00002 <span class="comment">*/</span>
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;algorithm&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;iomanip&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;cassert&gt;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="comment">//#define IA_NO_CRONOMETRAR</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include "../include/ia_ciega.h"</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="keyword">using namespace </span>std;
+<a name="l00013"></a>00013 <span class="keyword">using namespace </span>ia;
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="keyword">const</span> <span class="keywordtype">int</span> ANCHO = 3;
+<a name="l00016"></a>00016 <span class="keyword">const</span> <span class="keywordtype">int</span> ALTO = 3;
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="comment">// matrizFicha[2][1] = 6 quiere decir que en la fila 3 columna 2 está la ficha #6</span>
+<a name="l00019"></a>00019 <span class="keyword">typedef</span> <span class="keywordtype">int</span> MatrizFicha[ALTO][ANCHO];
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="comment">// Este es el estado</span>
+<a name="l00022"></a>00022 <span class="keyword">struct </span>Puzzle {
+<a name="l00023"></a>00023    MatrizFicha ficha;
+<a name="l00024"></a>00024    Puzzle() {}
+<a name="l00025"></a>00025    Puzzle(<span class="keywordtype">bool</span> tonta) { <span class="comment">// El parametro tonto hace que se pongan las fichas en el puzzle</span>
+<a name="l00026"></a>00026       <span class="keywordtype">int</span> numero = 0;
+<a name="l00027"></a>00027       <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> fila = 0; fila &lt; ALTO; ++ fila )
+<a name="l00028"></a>00028          <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> col = 0; col &lt; ANCHO; ++ col )
+<a name="l00029"></a>00029             ficha[fila][col] = ++numero;
+<a name="l00030"></a>00030       ficha[ALTO-1][ANCHO-1] = 0; <span class="comment">// La ultima queda vacía</span>
+<a name="l00031"></a>00031    }
+<a name="l00032"></a>00032    <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> Puzzle&amp; otro)<span class="keyword"> const </span>{
+<a name="l00033"></a>00033       <span class="keywordflow">return</span> lexicographical_compare( ficha[0], ficha[0] + ALTO * ANCHO, otro.ficha[0], otro.ficha[0] + ALTO * ANCHO);
+<a name="l00034"></a>00034    }
+<a name="l00035"></a>00035    <span class="keywordtype">bool</span> es_meta()<span class="keyword"> const </span>{
+<a name="l00036"></a>00036       <span class="keywordtype">int</span> numero = 0;
+<a name="l00037"></a>00037       <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> fila = 0; fila &lt; ALTO; ++ fila )
+<a name="l00038"></a>00038          <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> col = 0; col &lt; ANCHO; ++ col )
+<a name="l00039"></a>00039             <span class="keywordflow">if</span> ( ficha[fila][col] != ++numero &amp;&amp; numero != ANCHO*ALTO)
+<a name="l00040"></a>00040                <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00041"></a>00041       <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00042"></a>00042    }
+<a name="l00043"></a>00043    <span class="keyword">friend</span> ostream&amp; operator&lt;&lt;(ostream&amp; os, <span class="keyword">const</span> Puzzle&amp; t ) {
+<a name="l00044"></a>00044       os &lt;&lt; <span class="stringliteral">"\n"</span>;
+<a name="l00045"></a>00045       <span class="keywordflow">for</span>( <span class="keywordtype">int</span> fila = 0; fila &lt; ALTO; ++ fila ) {
+<a name="l00046"></a>00046          os &lt;&lt; <span class="stringliteral">"["</span>;
+<a name="l00047"></a>00047          <span class="keywordflow">for</span>( <span class="keywordtype">int</span> col = 0; col &lt; ANCHO; ++ col )
+<a name="l00048"></a>00048             os &lt;&lt; setw(4) &lt;&lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)t.ficha[fila][col];
+<a name="l00049"></a>00049          os &lt;&lt; <span class="stringliteral">"]\n"</span>;
+<a name="l00050"></a>00050       }
+<a name="l00051"></a>00051       <span class="keywordflow">return</span> os;
+<a name="l00052"></a>00052    }
+<a name="l00053"></a>00053 };
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 <span class="keyword">struct </span>Mover : <span class="keyword">public</span> <a name="_a0"></a><a class="code" href="structia_1_1_operacion.html">Operacion</a>&lt;Puzzle&gt; {
+<a name="l00056"></a>00056    <span class="keyword">enum</span> Direccion {ARRIBA, DERECHA, ABAJO, IZQUIERDA};
+<a name="l00057"></a>00057    Direccion dir;
+<a name="l00058"></a>00058    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fila_orig, col_orig; <span class="comment">// posicion desde la que se mueve la ficha</span>
+<a name="l00059"></a>00059    <span class="keywordtype">int</span> fila_des, col_des; <span class="comment">// posición a la que llega</span>
+<a name="l00060"></a>00060    <span class="comment">// Para inicializar se dice la posición inicial de la ficha y la dirección del movimento</span>
+<a name="l00061"></a>00061    Mover( <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&amp; fila_, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&amp; col_, <span class="keyword">const</span> Direccion&amp; dir_ ) : fila_orig( fila_ ), col_orig( col_ ), dir( dir_ ) {
+<a name="l00062"></a>00062       <span class="keywordflow">switch</span> ( dir ) {
+<a name="l00063"></a>00063          <span class="keywordflow">case</span> ARRIBA:
+<a name="l00064"></a>00064             assert( fila_orig != 0 );
+<a name="l00065"></a>00065             fila_des = fila_orig - 1;            col_des = col_orig;
+<a name="l00066"></a>00066             <span class="keywordflow">break</span>;
+<a name="l00067"></a>00067          <span class="keywordflow">case</span> DERECHA:
+<a name="l00068"></a>00068             assert( col_orig != ANCHO - 1 );
+<a name="l00069"></a>00069             fila_des = fila_orig;                col_des = col_orig + 1;
+<a name="l00070"></a>00070             <span class="keywordflow">break</span>;
+<a name="l00071"></a>00071          <span class="keywordflow">case</span> ABAJO:
+<a name="l00072"></a>00072             assert( fila_orig != ALTO - 1 );
+<a name="l00073"></a>00073             fila_des = fila_orig + 1;          col_des = col_orig;
+<a name="l00074"></a>00074             <span class="keywordflow">break</span>;
+<a name="l00075"></a>00075          <span class="keywordflow">case</span> IZQUIERDA:
+<a name="l00076"></a>00076             assert( col_orig != 0 );
+<a name="l00077"></a>00077             fila_des = fila_orig;               col_des = col_orig - 1;
+<a name="l00078"></a>00078             <span class="keywordflow">break</span>;
+<a name="l00079"></a>00079       }
+<a name="l00080"></a>00080    }
+<a name="l00081"></a>00081    <span class="keywordtype">bool</span> <a name="a1"></a><a class="code" href="structia_1_1_operacion.html#519c7dbfa4f68ad5370a1ee35354ef3b">operator()</a>( <span class="keyword">const</span> Puzzle&amp; antes, Puzzle&amp; despues )<span class="keyword"> const </span>{
+<a name="l00082"></a>00082       <span class="keywordflow">if</span> ( antes.ficha[fila_orig][col_orig] == 0 || antes.ficha[fila_des][col_des] != 0 )
+<a name="l00083"></a>00083          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00084"></a>00084       despues = antes;
+<a name="l00085"></a>00085       despues.ficha[fila_des][col_des] = antes.ficha[fila_orig][col_orig];
+<a name="l00086"></a>00086       despues.ficha[fila_orig][col_orig] = 0;
+<a name="l00087"></a>00087       <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00088"></a>00088    }
+<a name="l00089"></a>00089 };
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092 <span class="keywordtype">int</span> main() {
+<a name="l00093"></a>00093    Puzzle a, b(<span class="keyword">true</span>);
+<a name="l00094"></a>00094    <span class="keyword">typedef</span> vector&lt;Mover*&gt; Movimientos;
+<a name="l00095"></a>00095    Movimientos operaciones;
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097    <span class="comment">// Generar las operaciones</span>
+<a name="l00098"></a>00098    <span class="keywordflow">for</span>( <span class="keywordtype">int</span> fila = 0; fila &lt; ALTO; ++ fila )
+<a name="l00099"></a>00099       <span class="keywordflow">for</span>( <span class="keywordtype">int</span> col = 0; col &lt; ANCHO; ++ col ) {
+<a name="l00100"></a>00100          <span class="keywordflow">if</span> ( fila != 0 )
+<a name="l00101"></a>00101             operaciones.push_back( <span class="keyword">new</span> Mover( fila, col, Mover::ARRIBA ) );
+<a name="l00102"></a>00102          <span class="keywordflow">if</span> ( col != ANCHO - 1 )
+<a name="l00103"></a>00103             operaciones.push_back( <span class="keyword">new</span> Mover( fila, col, Mover::DERECHA ) );
+<a name="l00104"></a>00104          <span class="keywordflow">if</span> ( fila != ALTO - 1 )
+<a name="l00105"></a>00105             operaciones.push_back( <span class="keyword">new</span> Mover( fila, col, Mover::ABAJO ) );
+<a name="l00106"></a>00106          <span class="keywordflow">if</span> ( col != 0 )
+<a name="l00107"></a>00107             operaciones.push_back( <span class="keyword">new</span> Mover( fila, col, Mover::IZQUIERDA ) );
+<a name="l00108"></a>00108       }
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110    Puzzle ordenado(<span class="keyword">true</span>), inicial;
+<a name="l00111"></a>00111    
+<a name="l00112"></a>00112    <span class="comment">// Mezclar el puzzle</span>
+<a name="l00113"></a>00113    cout &lt;&lt; <span class="stringliteral">"Mezclando...\n"</span>;
+<a name="l00114"></a>00114    Movimientos mezcolanza( operaciones );
+<a name="l00115"></a>00115    <span class="keywordflow">for</span> ( <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> i = 0; i &lt; 100; ++ i )
+<a name="l00116"></a>00116       copy( operaciones.begin(), operaciones.end(), back_inserter( mezcolanza ) );
+<a name="l00117"></a>00117    set&lt;Puzzle&gt; intermedios; <span class="comment">// se usa para que no se retroceda al mezclar</span>
+<a name="l00118"></a>00118    intermedios.insert( ordenado );
+<a name="l00119"></a>00119    <span class="keywordflow">for</span>( <span class="keywordtype">int</span> paso = 0; paso &lt; 10; ++ paso ) {
+<a name="l00120"></a>00120       random_shuffle(mezcolanza.begin(), mezcolanza.end() );
+<a name="l00121"></a>00121       <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> i = 0; i &lt; mezcolanza.size(); ++ i )
+<a name="l00122"></a>00122          <span class="keywordflow">if</span> ( (*mezcolanza[i])(ordenado, inicial) &amp;&amp; intermedios.find(inicial) == intermedios.end() ) {
+<a name="l00123"></a>00123             intermedios.insert( inicial );
+<a name="l00124"></a>00124             ordenado = inicial;
+<a name="l00125"></a>00125          }
+<a name="l00126"></a>00126    }
+<a name="l00127"></a>00127    cout &lt;&lt; <span class="stringliteral">"Se mezclo con "</span> &lt;&lt; intermedios.size() &lt;&lt; <span class="stringliteral">" movidas\n"</span>;
+<a name="l00128"></a>00128    intermedios.clear();
+<a name="l00129"></a>00129    cout &lt;&lt; inicial;
+<a name="l00130"></a>00130    
+<a name="l00131"></a>00131    <a name="a2"></a><a class="code" href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e">mostrar_solucion</a>( inicial, <a name="a3"></a><a class="code" href="group__detalle__implementacion.html#gc576de7ced520b771831a409bc671363">profundidad_limitada</a>(operaciones, inicial,30) );
+<a name="l00132"></a>00132    <a name="a4"></a><a class="code" href="group__salida.html#g641d63b8b871dd3886aec1ddb3250563">mostrar_estadisticas</a>();
+<a name="l00133"></a>00133 }
+</pre></div> <hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:37 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

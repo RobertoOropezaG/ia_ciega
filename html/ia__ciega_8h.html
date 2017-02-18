@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Referencia del Archivo include/ia_ciega.h</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li id="current"><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<div class="tabs">
+  <ul>
+    <li><a href="files.html"><span>Lista&nbsp;de&nbsp;archivos</span></a></li>
+    <li><a href="globals.html"><span>Archivos&nbsp;de&nbsp;los&nbsp;miembros</span></a></li>
+  </ul></div>
+<h1>Referencia del Archivo include/ia_ciega.h</h1><hr><a name="_details"></a><h2>Descripción detallada</h2>
+<dl compact><dt><b>Autor:</b></dt><dd>Roberto Oropeza Gamarra Contiene a toda la libreria IA Ciega Mejora/Correccion/Optimizacion: Xxxxx añadio/modifico/quito yyyyy para/por zzzzz </dd></dl>
+
+<p>
+Definición en el archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.
+<p>
+<code>#include &lt;iostream&gt;</code><br>
+<code>#include &lt;string&gt;</code><br>
+<code>#include &lt;vector&gt;</code><br>
+<code>#include &lt;set&gt;</code><br>
+<code>#include &lt;map&gt;</code><br>
+<code>#include &lt;ctime&gt;</code><br>
+<code>#include &lt;cassert&gt;</code><br>
+<code>#include &lt;windows.h&gt;</code><br>
+
+<p>
+<a href="ia__ciega_8h-source.html">Ir al código fuente de este archivo.</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Namespaces</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">namespace &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceia.html">ia</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">namespace &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceia_1_1detalle.html">ia::detalle</a></td></tr>
+
+<tr><td colspan="2"><br><h2>Clases</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_operacion.html">ia::Operacion&lt; Estado_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Las operaciones pueden ser functores (objeto-funcion) que heredan de este, dándole como parámetro de plantilla el tipo del estado con el que opera.  <a href="structia_1_1_operacion.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_operaciones.html">ia::Operaciones&lt; Estado_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">La lista de operaciones se puede declarar como una instancia de esta estructura, que es un vector de punteros a las funciones que sirven de operadores.  <a href="structia_1_1_operaciones.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_nombres_operadores.html">ia::NombresOperadores&lt; Estado_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Si se tiene un vector con punteros a funciones para representar las operaciones que se pueden aplicar al realizar las búsquedas, debería instanciar una estructura como esta, dando como parámetro de plantilla el tipo de estado con el que opera.  <a href="structia_1_1_nombres_operadores.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_operadores_inversos.html">ia::OperadoresInversos&lt; Operaciones_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Si utiliza las búsquedas bi-direccionales con un vector con punteros a funciones para representar las operaciones que se pueden aplicar al realizar las búsquedas, puede utilizar este mapa para establecer las operaciones inversas.  <a href="structia_1_1_operadores_inversos.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classia_1_1_secuencia_estados.html">ia::SecuenciaEstados&lt; Estado_t, Operaciones_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Un contenedor que se construye en base al estado inicial y a una secuencia de operadores como las que devuelven las búsquedas; pero que al iterar devuelve los <em>estados</em> generados al aplicar esas operaciones.  <a href="classia_1_1_secuencia_estados.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classia_1_1_secuencia_estados_1_1iterator.html">ia::SecuenciaEstados&lt; Estado_t, Operaciones_t &gt;::iterator</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Este iterador es el que da al contenedor <a class="el" href="classia_1_1_secuencia_estados.html">SecuenciaEstados</a> todas las características mencionadas en su descripción.  <a href="classia_1_1_secuencia_estados_1_1iterator.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_estado_y_ruta.html">ia::detalle::EstadoYRuta&lt; Estado_t, Operaciones_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Alias para contener varios estados cada uno con las operaciones realizadas para llegar a él (o sea, su ruta).  <a href="structia_1_1detalle_1_1_estado_y_ruta.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_set_estado_y_ruta.html">ia::detalle::SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Alias para tener varios estados ordenados de acuerdo a cierto criterio (dado por Comparador_t), cada uno asociado con las operaciones realizadas para llegar a él (o sea, su ruta).  <a href="structia_1_1detalle_1_1_set_estado_y_ruta.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_multiset_estado_y_ruta.html">ia::detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Alias para tener varios estados ordenados de acuerdo a cierto criterio (dado por Comparador_mejor_t), cada uno asociado con las operaciones realizadas para llegar a él (o sea, su ruta).  <a href="structia_1_1detalle_1_1_multiset_estado_y_ruta.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_compara_estados_ignorando_rutas.html">ia::detalle::ComparaEstadosIgnorandoRutas&lt; Estado_t, T &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Functor auxiliar que compara un par &lt;estado, ruta&gt; tomando en cuenta solamente el estado.  <a href="structia_1_1detalle_1_1_compara_estados_ignorando_rutas.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_grafo.html">ia::Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">La estructura del grafo.  <a href="structia_1_1_grafo.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_enlaces.html">ia::Enlaces&lt; Nodo_t, Iterador_t, Costo_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">La estructura de los enlaces del grafo.  <a href="structia_1_1_enlaces.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_enlaces_1_1_auxiliar__costo__asignable__t.html">ia::Enlaces&lt; Nodo_t, Iterador_t, Costo_t &gt;::Auxiliar_costo_asignable_t</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Se utiliza para que el usuario pueda asignar el costo a un enlace de manera intuitiva.  <a href="structia_1_1_enlaces_1_1_auxiliar__costo__asignable__t.html#_details">Más...</a><br></td></tr>
+<tr><td colspan="2"><br><h2>Definiciones</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="g2ca880b75037a67e30bc43fac3a2d7f8"></a><!-- doxytag: member="ia_ciega.h::IA_IF_DEVUELVE_FALSO_REGISTRAR_SOLUCION" ref="g2ca880b75037a67e30bc43fac3a2d7f8" args="(ruta, estado)" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#g2ca880b75037a67e30bc43fac3a2d7f8">IA_IF_DEVUELVE_FALSO_REGISTRAR_SOLUCION</a>(ruta, estado)&nbsp;&nbsp;&nbsp;if ( ! registrar_solucion || ! (*registrar_solucion)(ruta, estado) )</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Para que podamos poner esta macro en vez del if largo, y que no tenga efecto si se ha deshabilitado el registro de soluciones usando IA_NO_REGISTRAR_SOLUCION. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="75123461572925fe75a7797d9930f1ff"></a><!-- doxytag: member="ia_ciega.h::IA_INICIO_CRONOMETRO" ref="75123461572925fe75a7797d9930f1ff" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia__ciega_8h.html#75123461572925fe75a7797d9930f1ff">IA_INICIO_CRONOMETRO</a>&nbsp;&nbsp;&nbsp;ia::detalle::cronometro = GetTickCount();</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="7069a221044d02e36ba170bb4d9f9f93"></a><!-- doxytag: member="ia_ciega.h::IA_FIN_CRONOMETRO" ref="7069a221044d02e36ba170bb4d9f9f93" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia__ciega_8h.html#7069a221044d02e36ba170bb4d9f9f93">IA_FIN_CRONOMETRO</a>&nbsp;&nbsp;&nbsp;ia::detalle::cronometro = GetTickCount() - ia::detalle::cronometro;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="66e81ab08112c2f3dc68fa6af14765f3"></a><!-- doxytag: member="ia_ciega.h::IA_INCREMENTAR_SOLUCIONES" ref="66e81ab08112c2f3dc68fa6af14765f3" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia__ciega_8h.html#66e81ab08112c2f3dc68fa6af14765f3">IA_INCREMENTAR_SOLUCIONES</a>&nbsp;&nbsp;&nbsp;detalle::conteo_soluciones ++;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="f5fc73a3321698af5ac603dad6b7b8ba"></a><!-- doxytag: member="ia_ciega.h::IA_INCREMENTAR_EXPANDIDOS" ref="f5fc73a3321698af5ac603dad6b7b8ba" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia__ciega_8h.html#f5fc73a3321698af5ac603dad6b7b8ba">IA_INCREMENTAR_EXPANDIDOS</a>&nbsp;&nbsp;&nbsp;detalle::conteo_expandidos ++;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="6db07d249f26d7e95c401d3a811207e1"></a><!-- doxytag: member="ia_ciega.h::IA_INCREMENTAR_VISITADOS" ref="6db07d249f26d7e95c401d3a811207e1" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia__ciega_8h.html#6db07d249f26d7e95c401d3a811207e1">IA_INCREMENTAR_VISITADOS</a>&nbsp;&nbsp;&nbsp;detalle::conteo_visitados ++;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="d1f80335fab5b60630b49f6b22f03069"></a><!-- doxytag: member="ia_ciega.h::IA_INCREMENTAR_PROFUNDIDAD_MAXIMA" ref="d1f80335fab5b60630b49f6b22f03069" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia__ciega_8h.html#d1f80335fab5b60630b49f6b22f03069">IA_INCREMENTAR_PROFUNDIDAD_MAXIMA</a>&nbsp;&nbsp;&nbsp;detalle::profundidad_maxima ++;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="8c710b96f42c498d9a8f839de66006ea"></a><!-- doxytag: member="ia_ciega.h::IA_ACTUALIZAR_PROFUNDIDAD_MAXIMA" ref="8c710b96f42c498d9a8f839de66006ea" args="(X)" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia__ciega_8h.html#8c710b96f42c498d9a8f839de66006ea">IA_ACTUALIZAR_PROFUNDIDAD_MAXIMA</a>(X)&nbsp;&nbsp;&nbsp;if ( detalle::profundidad_maxima &lt; (X) ) detalle::profundidad_maxima = X;</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="2ed87f010933dea8539d11d5b298021a"></a><!-- doxytag: member="ia_ciega.h::IA_REINICIAR_ESTADISTICAS" ref="2ed87f010933dea8539d11d5b298021a" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia__ciega_8h.html#2ed87f010933dea8539d11d5b298021a">IA_REINICIAR_ESTADISTICAS</a>&nbsp;&nbsp;&nbsp;detalle::reiniciar_estadisticas();</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="552aca858906c0b6acf6652d1eec7f0f"></a><!-- doxytag: member="ia_ciega.h::IA_REINICIAR_VISITADOS" ref="552aca858906c0b6acf6652d1eec7f0f" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia__ciega_8h.html#552aca858906c0b6acf6652d1eec7f0f">IA_REINICIAR_VISITADOS</a>&nbsp;&nbsp;&nbsp;detalle::conteo_visitados = 0;</td></tr>
+
+<tr><td colspan="2"><br><h2>Funciones</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="eb959eaf0956ad7e5e79e6e8a0ca4ceb"></a><!-- doxytag: member="ia_ciega.h::reiniciar_estadisticas" ref="eb959eaf0956ad7e5e79e6e8a0ca4ceb" args="()" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceia_1_1detalle.html#eb959eaf0956ad7e5e79e6e8a0ca4ceb">ia::detalle::reiniciar_estadisticas</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__salida.html#g641d63b8b871dd3886aec1ddb3250563">ia::mostrar_estadisticas</a> ()</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra las estadísticas de la última búsqueda realizada.  <a href="group__salida.html#g641d63b8b871dd3886aec1ddb3250563"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e">ia::mostrar_solucion</a> (const Estado_t &amp;inicial, const Operaciones_t &amp;solucion)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra la solucion como los estados intermedios entre el estado inicial y la meta así como la operación aplicada a cada uno para obtener el siguiente, es apta cuando los operadores son objetos función.  <a href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__salida.html#g17533d6fa796559e64faec2e6738b24d">ia::mostrar_solucion</a> (const Operaciones_t &amp;solucion)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra la solucion como las operaciones necesarias para llegar a la meta sin mostrar estados intermedios, es apta cuando los operadores son objetos funcion.  <a href="group__salida.html#g17533d6fa796559e64faec2e6738b24d"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename NombreOperador_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__salida.html#gada5c46624e616069191a1c033c11733">ia::mostrar_solucion</a> (const Estado_t &amp;inicial, const Operaciones_t &amp;solucion, const NombreOperador_t &amp;nombre_operadores)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra la solucion como los estados intermedios entre el estado inicial y la meta así como la operación aplicada a cada uno para obtener el siguiente, es apta cuando los operadores son punteros a funciones.  <a href="group__salida.html#gada5c46624e616069191a1c033c11733"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2"><a class="anchor" name="ge76db04e2644a8e385c545148b3209b7"></a><!-- doxytag: member="ia_ciega.h::mostrar_estado_solucion" ref="ge76db04e2644a8e385c545148b3209b7" args="(const Estado_t &amp;inicial, const Operaciones_t &amp;solucion)" -->
+template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__salida.html#ge76db04e2644a8e385c545148b3209b7">ia::mostrar_estado_solucion</a> (const Estado_t &amp;inicial, const Operaciones_t &amp;solucion)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra la solución como el estado alcanzado después de realizar las operaciones dadas al estado inicial dado, es apta tanto para operaciones como functores como con objetos función. <br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; typename Operaciones_t::value_type &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceia.html#4a68a7ab04b3254c2db2bd160bf6aadf">ia::simplificar_bidireccional</a> (const pair&lt; vector&lt; typename Operaciones_t::value_type &gt;, vector&lt; typename Operaciones_t::value_type &gt; &gt; &amp;solucion, const OperadoresInversos&lt; Operaciones_t &gt; &amp;inversos)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Recibe una solución bidireccional y devuelve una solucion secuencial.  <a href="#4a68a7ab04b3254c2db2bd160bf6aadf"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; typename Operaciones_t::value_type &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#g146585979cd3482b56bb8ed8aadcdcd7">ia::detalle::preferencia_amplitud</a> (const Operaciones_t &amp;operaciones, detalle::EstadoYRuta&lt; Estado_t, Operaciones_t &gt; &amp;expansibles, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algorítmo de búsqueda por amplitud, no es recursivo.  <a href="group__detalle__implementacion.html#g146585979cd3482b56bb8ed8aadcdcd7"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">Ruta_t&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#ga81bb2a346107cbfe5debe839f71e5d8">ia::detalle::preferencia_profundidad</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, bool &amp;finalizar, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por profundidad, es recursivo.  <a href="group__detalle__implementacion.html#ga81bb2a346107cbfe5debe839f71e5d8"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">Ruta_t&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#gc576de7ced520b771831a409bc671363">ia::detalle::profundidad_limitada</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, const unsigned int &amp;limite_profundidad, bool &amp;finalizar, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por profundidad limitada, es recursivo pero solo tiene una variable Estado_t en el stack, el resto son estáticas.  <a href="group__detalle__implementacion.html#gc576de7ced520b771831a409bc671363"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t, typename Comparador_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">pair&lt; Ruta_t, bool &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#gd52da0628461fbda96aac48a75f29122">ia::detalle::profundidad_limitada_doble</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, const unsigned int &amp;limite_profundidad, bool &amp;finalizar, SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;atajos, SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;nuevos_atajos, bool(*registrar_solucion)(vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por profundidad limitada doble, es recursivo pero solo tiene una variable Estado_t en el stack, el resto son estáticas.  <a href="group__detalle__implementacion.html#gd52da0628461fbda96aac48a75f29122"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Comparador_mejor_t, typename Ruta_t, typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">Ruta_t&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#ge15de63db4b071b0a2e2d1b7b221eefb">ia::detalle::primero_mejor</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt; &amp;expansibles, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por primero el mejor (A*), no es recursivo.  <a href="group__detalle__implementacion.html#ge15de63db4b071b0a2e2d1b7b221eefb"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; typename Operaciones_t::value_type &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__algoritmos.html#g5751a93210591eea5751a12906205cfa">ia::preferencia_amplitud</a> (const Operaciones_t &amp;operaciones, const Estado_t &amp;inicial, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)=NULL)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Funcion para buscar una o mas soluciones usando el método de preferencia por amplitud.  <a href="group__algoritmos.html#g5751a93210591eea5751a12906205cfa"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; typename Operaciones_t::value_type &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__algoritmos.html#g93f93e883b4d10e71f109d1a08d75dea">ia::preferencia_profundidad</a> (const Operaciones_t &amp;operaciones, const Estado_t &amp;inicial, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)=NULL)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Función para buscar una o más soluciones usando el método de preferencia por profundidad (depth-first-search).  <a href="group__algoritmos.html#g93f93e883b4d10e71f109d1a08d75dea"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; typename Operaciones_t::value_type &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__algoritmos.html#g7e6250c9a79fe9cbf813420ef1e1ac4b">ia::profundidad_limitada</a> (const Operaciones_t &amp;operaciones, const Estado_t &amp;inicial, const unsigned int &amp;limite_profundidad, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)=NULL)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Funcion para buscar una o mas soluciones usando el método de profundidad limitada.  <a href="group__algoritmos.html#g7e6250c9a79fe9cbf813420ef1e1ac4b"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; typename Operaciones_t::value_type &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__algoritmos.html#g4e950218e635de0baf0e635bc0d1acef">ia::profundidad_iterativa</a> (const Operaciones_t &amp;operaciones, const Estado_t &amp;inicial, const unsigned int &amp;limite_profundidad, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)=NULL)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Funcion para buscar una o mas soluciones usando el método de profundidad iterativa.  <a href="group__algoritmos.html#g4e950218e635de0baf0e635bc0d1acef"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Comparador_mejor_t, typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; typename Operaciones_t::value_type &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__algoritmos.html#gef69ca62c07d45deb94e1ae106b08193">ia::primero_mejor</a> (const Operaciones_t &amp;operaciones, const Estado_t &amp;inicial, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)=NULL)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Busca en el espacio de estados usando el algoritmo primero mejor.  <a href="group__algoritmos.html#gef69ca62c07d45deb94e1ae106b08193"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">pair&lt; vector&lt; typename Operaciones_t::value_type &gt;,<br>
+ vector&lt; typename Operaciones_t::value_type &gt; &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__algoritmos.html#gb77ee36cd0863098b3ea21168341acfc">ia::profundidad_limitada_doble</a> (const Operaciones_t &amp;operaciones, const Estado_t &amp;inicial, const Estado_t &amp;final, const unsigned int &amp;limite_profundidad, bool(*registrar_solucion)(vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)=NULL)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Busca en el espacio de estados usando un algoritmo similar al de profundidad limitada, pero empezando desde el estado inicial y el estado final.  <a href="group__algoritmos.html#gb77ee36cd0863098b3ea21168341acfc"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2"><a class="anchor" name="6b177a5d96ecaa77f5e626692488060d"></a><!-- doxytag: member="ia_ciega.h::vecino_mas_proximo" ref="6b177a5d96ecaa77f5e626692488060d" args="(Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt; &amp;grafo, typename Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt;::iterator &amp;it_nodo)" -->
+template&lt;typename Nodo_t, typename Iterador_t, typename Costo_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; Iterador_t &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceia.html#6b177a5d96ecaa77f5e626692488060d">ia::vecino_mas_proximo</a> (Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt; &amp;grafo, typename Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt;::iterator &amp;it_nodo)</td></tr>
+
+<tr><td class="memTemplParams" nowrap colspan="2"><a class="anchor" name="2feea471b5b3317571ae34dc29d00498"></a><!-- doxytag: member="ia_ciega.h::vecino_mas_proximo" ref="2feea471b5b3317571ae34dc29d00498" args="(Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt; &amp;grafo, const Nodo_t &amp;nodo)" -->
+template&lt;typename Nodo_t, typename Iterador_t, typename Costo_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; Iterador_t &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceia.html#2feea471b5b3317571ae34dc29d00498">ia::vecino_mas_proximo</a> (Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt; &amp;grafo, const Nodo_t &amp;nodo)</td></tr>
+
+</table>
+<hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:37 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

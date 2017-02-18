@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Útiles para mostrar resultados</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1>Útiles para mostrar resultados</h1>
+<p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Clases</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_nombres_operadores.html">ia::NombresOperadores&lt; Estado_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Si se tiene un vector con punteros a funciones para representar las operaciones que se pueden aplicar al realizar las búsquedas, debería instanciar una estructura como esta, dando como parámetro de plantilla el tipo de estado con el que opera.  <a href="structia_1_1_nombres_operadores.html#_details">Más...</a><br></td></tr>
+<tr><td colspan="2"><br><h2>Funciones</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__salida.html#g641d63b8b871dd3886aec1ddb3250563">ia::mostrar_estadisticas</a> ()</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra las estadísticas de la última búsqueda realizada.  <a href="#g641d63b8b871dd3886aec1ddb3250563"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e">ia::mostrar_solucion</a> (const Estado_t &amp;inicial, const Operaciones_t &amp;solucion)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra la solucion como los estados intermedios entre el estado inicial y la meta así como la operación aplicada a cada uno para obtener el siguiente, es apta cuando los operadores son objetos función.  <a href="#g25dbda0de5763d83f28ebfb20a885f3e"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__salida.html#g17533d6fa796559e64faec2e6738b24d">ia::mostrar_solucion</a> (const Operaciones_t &amp;solucion)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra la solucion como las operaciones necesarias para llegar a la meta sin mostrar estados intermedios, es apta cuando los operadores son objetos funcion.  <a href="#g17533d6fa796559e64faec2e6738b24d"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename NombreOperador_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__salida.html#gada5c46624e616069191a1c033c11733">ia::mostrar_solucion</a> (const Estado_t &amp;inicial, const Operaciones_t &amp;solucion, const NombreOperador_t &amp;nombre_operadores)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra la solucion como los estados intermedios entre el estado inicial y la meta así como la operación aplicada a cada uno para obtener el siguiente, es apta cuando los operadores son punteros a funciones.  <a href="#gada5c46624e616069191a1c033c11733"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2"><a class="anchor" name="ge76db04e2644a8e385c545148b3209b7"></a><!-- doxytag: member="salida::mostrar_estado_solucion" ref="ge76db04e2644a8e385c545148b3209b7" args="(const Estado_t &amp;inicial, const Operaciones_t &amp;solucion)" -->
+template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__salida.html#ge76db04e2644a8e385c545148b3209b7">ia::mostrar_estado_solucion</a> (const Estado_t &amp;inicial, const Operaciones_t &amp;solucion)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Muestra la solución como el estado alcanzado después de realizar las operaciones dadas al estado inicial dado, es apta tanto para operaciones como functores como con objetos función. <br></td></tr>
+</table>
+<hr><h2>Documentación de las funciones</h2>
+<a class="anchor" name="g641d63b8b871dd3886aec1ddb3250563"></a><!-- doxytag: member="ia::mostrar_estadisticas" ref="g641d63b8b871dd3886aec1ddb3250563" args="()" --><p>
+<table class="mdTable" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="md" nowrap valign="top">void ia::mostrar_estadisticas           </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap>          </td>
+          <td class="md" valign="top">&nbsp;)&nbsp;</td>
+          <td class="md" nowrap></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing="5" cellpadding="0" border="0">
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Muestra las estadísticas de la última búsqueda realizada. 
+<p>
+Si no se ha #definido IA_NO_ESTADISTICAS mostrará cero en todos los conteos. Si no se ha #definido IA_NO_CRONOMETRAR mostrará la cantidad de milisegundos transcurridos. Los milisegundos tienen una precisión de +/- 16 milisegundos, debido a que se usa la funcion GetTickCount de la API de windows y no se consulta directamente al procesador. <dl compact><dt><b>Ejemplos: </b></dt><dd>
+<a class="el" href="8puzzle_8cpp-example.html#a4">8puzzle.cpp</a>, <a class="el" href="cantaros_8cpp-example.html#a9">cantaros.cpp</a>, <a class="el" href="laberinto_8cpp-example.html#a19">laberinto.cpp</a>, <a class="el" href="pastor_8cpp-example.html#a32">pastor.cpp</a>, y <a class="el" href="reinas_8cpp-example.html#a39">reinas.cpp</a>.</dl>
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00110">110</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.    </td>
+  </tr>
+</table>
+<a class="anchor" name="gada5c46624e616069191a1c033c11733"></a><!-- doxytag: member="ia::mostrar_solucion" ref="gada5c46624e616069191a1c033c11733" args="(const Estado_t &amp;inicial, const Operaciones_t &amp;solucion, const NombreOperador_t &amp;nombre_operadores)" --><p>
+<table class="mdTable" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="mdPrefix" colspan="4">
+template&lt;typename Estado_t, typename Operaciones_t, typename NombreOperador_t&gt; </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap valign="top">void ia::mostrar_solucion           </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const Estado_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>inicial</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>const Operaciones_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>solucion</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>const NombreOperador_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>nombre_operadores</em></td>
+        </tr>
+        <tr>
+          <td class="md"></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing="5" cellpadding="0" border="0">
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Muestra la solucion como los estados intermedios entre el estado inicial y la meta así como la operación aplicada a cada uno para obtener el siguiente, es apta cuando los operadores son punteros a funciones. 
+<p>
+<dl compact><dt><b>Parámetros:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>inicial</em>&nbsp;</td><td>Es el estado inicial que tenia el problema. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>solucion</em>&nbsp;</td><td>Una secuencia (p.e. un vector) con las operaciones que nos llevan a la solucion </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>nombre_operadores</em>&nbsp;</td><td>Un mapa (p.e. NombresOperador) en que la llave es un puntero a la funcion y el valor, su nombre. Esta funcion muestra la cantidad de operaciones en solucion, el estado inicial y luego va aplicando las operaciones dadas en solucion al estado inicial para obtener los estados sucesivos y va mostrando el dato asociado a cada uno en el mapa nombre_operadores </td></tr>
+  </table>
+</dl>
+
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00172">172</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.    </td>
+  </tr>
+</table>
+<a class="anchor" name="g17533d6fa796559e64faec2e6738b24d"></a><!-- doxytag: member="ia::mostrar_solucion" ref="g17533d6fa796559e64faec2e6738b24d" args="(const Operaciones_t &amp;solucion)" --><p>
+<table class="mdTable" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="mdPrefix" colspan="4">
+template&lt;typename Operaciones_t&gt; </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap valign="top">void ia::mostrar_solucion           </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const Operaciones_t &amp;&nbsp;</td>
+          <td class="mdname1" valign="top" nowrap> <em>solucion</em>          </td>
+          <td class="md" valign="top">&nbsp;)&nbsp;</td>
+          <td class="md" nowrap></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing="5" cellpadding="0" border="0">
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Muestra la solucion como las operaciones necesarias para llegar a la meta sin mostrar estados intermedios, es apta cuando los operadores son objetos funcion. 
+<p>
+<dl compact><dt><b>Parámetros:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>solucion</em>&nbsp;</td><td>Una secuencia (p.e. un vector) con las operaciones que nos llevan a la solucion Cada miembro de la solucion debe tener un método get_descripción que devuelve el nombre del operador </td></tr>
+  </table>
+</dl>
+
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00152">152</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.    </td>
+  </tr>
+</table>
+<a class="anchor" name="g25dbda0de5763d83f28ebfb20a885f3e"></a><!-- doxytag: member="ia::mostrar_solucion" ref="g25dbda0de5763d83f28ebfb20a885f3e" args="(const Estado_t &amp;inicial, const Operaciones_t &amp;solucion)" --><p>
+<table class="mdTable" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="mdPrefix" colspan="4">
+template&lt;typename Estado_t, typename Operaciones_t&gt; </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap valign="top">void ia::mostrar_solucion           </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const Estado_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>inicial</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>const Operaciones_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>solucion</em></td>
+        </tr>
+        <tr>
+          <td class="md"></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing="5" cellpadding="0" border="0">
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Muestra la solucion como los estados intermedios entre el estado inicial y la meta así como la operación aplicada a cada uno para obtener el siguiente, es apta cuando los operadores son objetos función. 
+<p>
+<dl compact><dt><b>Parámetros:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>inicial</em>&nbsp;</td><td>Es el estado inicial que tenia el problema. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>solucion</em>&nbsp;</td><td>Una secuencia (p.e. un vector) con las operaciones que nos llevan a la solucion Cada miembro de la solucion debe tener un método get_descripción que devuelve el nombre del operador Esta función muestra la cantidad de operaciones en solucion, el estado inicial y luego va aplicando las operaciones dadas en solucion al estado inicial para obtener los estados sucesivos y los va mostrando </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Ejemplos: </b></dt><dd>
+<a class="el" href="8puzzle_8cpp-example.html#a2">8puzzle.cpp</a>, <a class="el" href="cantaros_8cpp-example.html#a7">cantaros.cpp</a>, <a class="el" href="laberinto_8cpp-example.html#a16">laberinto.cpp</a>, <a class="el" href="laberinto2_8cpp-example.html#a27">laberinto2.cpp</a>, <a class="el" href="pastor_8cpp-example.html#a30">pastor.cpp</a>, y <a class="el" href="viajero_8cpp-example.html#a42">viajero.cpp</a>.</dl>
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00130">130</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.    </td>
+  </tr>
+</table>
+<hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:38 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

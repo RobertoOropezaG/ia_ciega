@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Uso de macros para deshabilitar estadísticas y registro de soluciones.</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1><a class="anchor" name="preprocesador">Uso de macros para deshabilitar estadísticas y registro de soluciones.</a></h1>La librería puede obtener algunas métricas sobre la cantidad de estados visitados, expandidos, etc esto reduce un poco la velocidad de la búsqueda.<p>
+Para evitar el cálculo de métricas ponga la linea: <div class="fragment"><pre class="fragment"><span class="preprocessor"> #define IA_NO_ESTADISTICAS </span>
+</pre></div> antes de # incluir esta librería.<p>
+Para evitar que se tomen métricas de tiempo de ejecución ponga la línea <div class="fragment"><pre class="fragment"><span class="preprocessor"> #define IA_NO_CRONOMETRAR</span>
+</pre></div> antes de # incluir esta ibrería. Es necesario definir esta macro si no está compilando en plataforma Windows.<p>
+La precisión de las métricas de tiempo tienen un error de (+/-)8 milisegundos<p>
+Si se definen ambas macros el cálculo de estadísticas no se llevará a cabo y las búsquedas se harán un poco mas rápido, la definición de solo una también aumenta la velocidad.<p>
+Las funciones de búsqueda reciben un parámetro opcional <code>registrar_solucion</code> que puede ser llamado cada vez que se halla una solucion y permite continuar la busqueda para encontrar todas las soluciones; para deshabilitar esta característica (y así aumentar un poco la velocidad de los algorítmos) ponga la linea:<div class="fragment"><pre class="fragment"><span class="preprocessor"> #define IA_NO_REGISTRAR_SOLUCION </span>
+</pre></div> antes de # incluir esta librería. De todas maneras se podrá pasar el parámetro registrar_solucion a las funciones, pero no se utilizará, esto es así para que el programador usuario no deba modificar su propio código fuente. <hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:37 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

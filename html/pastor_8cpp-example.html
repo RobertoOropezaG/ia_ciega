@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: pastor.cpp</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1>pastor.cpp</h1>Usa punteros a funciones para especificar las operaciones realizables sobre los estados. Demuestra cómo poner nombres a las operaciones que estan dadas como punteros a funciones.<p>
+Lo único que usa de la STL es el tipo <code>vector</code> y el <code>map</code>, sobre el vector solo usa el metodo <code>push_back</code> que sirve para aumentar un valor más al vector, y del <code>map</code> usa el operador corchetes ( <code>operator[]</code> ), que hace que un <code>map</code> se pueda usar más o menos como un vector.<p>
+Utiliza las búsquedas de preferencia por amplitud, profundidad limitada y profundidad iterativa.<p>
+Resuelve el problema del pastor, el lobo, la oveja y el pasto: El hombre (pastor), el lobo, la oveja y el pasto (forraje) están en la orilla izquierda del rio. El pastor tiene una canoa en que solo cabe él y una cosa más (ya sea el lobo, la oveja o el forraje) Si deja solos al lobo y a la oveja, muere la oveja; Si deja solos a la oveja y al forraje, se acaba el forraje. Debe llevar TODO, sano y salvo, a la otra orilla.<p>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/* Resuelve el problema del pastor, el lobo, la oveja y el pasto:</span>
+<a name="l00002"></a>00002 <span class="comment">   El hombre (pastor), el lobo, la oveja y el pasto (forraje) están en la orilla izquierda del rio.</span>
+<a name="l00003"></a>00003 <span class="comment">   El pastor tiene una canoa en que solo cabe él y una cosa más (ya sea el lobo, la oveja o el forraje)</span>
+<a name="l00004"></a>00004 <span class="comment">   Si deja solos al lobo y a la oveja, muere la oveja; </span>
+<a name="l00005"></a>00005 <span class="comment">   Si deja solos a la oveja y al forraje, chau forraje.</span>
+<a name="l00006"></a>00006 <span class="comment">   Debe llevar TODO, sano y salvo, a la otra orilla.</span>
+<a name="l00007"></a>00007 <span class="comment">*/</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 <span class="preprocessor">#include "../include/ia_ciega.h"</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="keyword">using namespace </span>std;
+<a name="l00016"></a>00016 <span class="keyword">using namespace </span>ia;
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="keyword">enum</span> Orilla {IZQ = 0, DER = 1};
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 <span class="keyword">struct </span>Estado {
+<a name="l00021"></a>00021    <span class="comment">// Si hombre vale DER el hombre esta en la orilla derecha, </span>
+<a name="l00022"></a>00022    <span class="comment">// si oveja vale IZQ la oveja esta en la orilla izquierda, etc.</span>
+<a name="l00023"></a>00023    Orilla hombre, lobo, oveja, forraje, bote;
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025    Estado() {}
+<a name="l00026"></a>00026    Estado( Orilla hombre_, Orilla lobo_, Orilla oveja_, Orilla forraje_, Orilla bote_ )
+<a name="l00027"></a>00027    : hombre(hombre_), lobo( lobo_ ), oveja( oveja_ ), forraje( forraje_ ), bote( bote_ ) {
+<a name="l00028"></a>00028    }
+<a name="l00029"></a>00029    <span class="comment">// Devuelve true ssi este estado es válido, es decir, ssi nadie se comerá a nadie</span>
+<a name="l00030"></a>00030    <span class="keywordtype">bool</span> valido()<span class="keyword"> const </span>{
+<a name="l00031"></a>00031       <span class="keywordflow">return</span> !( ( lobo == oveja &amp;&amp; hombre != lobo ) || (oveja == forraje &amp;&amp; hombre != oveja) );
+<a name="l00032"></a>00032    }
+<a name="l00033"></a>00033    <span class="comment">// Devuelve true ssi es un estado meta</span>
+<a name="l00034"></a>00034    <span class="keywordtype">bool</span> es_meta()<span class="keyword"> const </span>{
+<a name="l00035"></a>00035       <span class="keywordflow">return</span> hombre == DER &amp;&amp; lobo == DER &amp;&amp; oveja == DER &amp;&amp; forraje == DER
+<a name="l00036"></a>00036             &amp;&amp; bote == DER;
+<a name="l00037"></a>00037    }
+<a name="l00038"></a>00038    <span class="comment">// Un operador de orden debil estricto, para que pueda estar en un std::set</span>
+<a name="l00039"></a>00039    <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> Estado&amp; otro)<span class="keyword"> const </span>{
+<a name="l00040"></a>00040       <span class="comment">// formamos el patron de bits correspondiente a ambos estados y los comparamos</span>
+<a name="l00041"></a>00041       <span class="keywordflow">return</span> ((((bote&lt;&lt;1 | forraje)&lt;&lt;1 | oveja)&lt;&lt;1 | lobo)&lt;&lt;1 | hombre)
+<a name="l00042"></a>00042              &lt; ((((otro.bote&lt;&lt;1 | otro.forraje  )&lt;&lt;1 | otro.oveja)&lt;&lt;1 | otro.lobo)&lt;&lt;1 | otro.hombre);
+<a name="l00043"></a>00043    }
+<a name="l00044"></a>00044    <span class="comment">// Devuelve una cadena con la especificación del estado</span>
+<a name="l00045"></a>00045    <span class="comment">// Solo es necesario si se quiere mostrar las soluciones con estados intermedios</span>
+<a name="l00046"></a>00046    <span class="keyword">friend</span> ostream&amp; operator&lt;&lt;(ostream&amp; os, <span class="keyword">const</span> Estado&amp; e ) {
+<a name="l00047"></a>00047       os &lt;&lt; <span class="stringliteral">"("</span> &lt;&lt; (e.hombre ? <span class="stringliteral">"Hd"</span> : <span class="stringliteral">"Hi"</span>) &lt;&lt; (e.lobo ? <span class="stringliteral">", Ld"</span> : <span class="stringliteral">", Li"</span>) &lt;&lt; (e.oveja ? <span class="stringliteral">", Od"</span> : <span class="stringliteral">", Oi"</span>) &lt;&lt; (e.forraje ? <span class="stringliteral">", Fd"</span> : <span class="stringliteral">", Fi"</span>) &lt;&lt; <span class="stringliteral">")"</span>;
+<a name="l00048"></a>00048       <span class="keywordflow">return</span> os;
+<a name="l00049"></a>00049    }
+<a name="l00050"></a>00050 };
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 <span class="comment">// El hombre solito a la derecha</span>
+<a name="l00054"></a>00054 <span class="keywordtype">bool</span> h_der( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00055"></a>00055    <span class="keywordflow">if</span> ( antes.hombre == DER || antes.bote == DER )
+<a name="l00056"></a>00056       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00057"></a>00057    despues = Estado( DER, antes.lobo, antes.oveja, antes.forraje, DER );
+<a name="l00058"></a>00058    <span class="keywordflow">return</span> despues.valido();
+<a name="l00059"></a>00059 }
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 <span class="comment">// El hombre solito a la izquierda</span>
+<a name="l00062"></a>00062 <span class="keywordtype">bool</span> h_izq( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00063"></a>00063    <span class="keywordflow">if</span> ( antes.hombre == IZQ || antes.bote == IZQ )
+<a name="l00064"></a>00064       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00065"></a>00065    despues = Estado( IZQ, antes.lobo, antes.oveja, antes.forraje, IZQ );
+<a name="l00066"></a>00066    <span class="keywordflow">return</span> despues.valido();
+<a name="l00067"></a>00067 }
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069 <span class="comment">// el hombre y el lobo a la orilla derecha</span>
+<a name="l00070"></a>00070 <span class="keywordtype">bool</span> hl_der(<span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00071"></a>00071    <span class="keywordflow">if</span> ( antes.hombre == DER || antes.lobo == DER || antes.bote == DER )
+<a name="l00072"></a>00072       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00073"></a>00073    despues = Estado( DER, DER, antes.oveja, antes.forraje, DER );
+<a name="l00074"></a>00074    <span class="keywordflow">return</span> despues.valido();
+<a name="l00075"></a>00075 }
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077 <span class="keywordtype">bool</span> hl_izq(<span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00078"></a>00078    <span class="keywordflow">if</span> ( antes.hombre == IZQ || antes.lobo == IZQ || antes.bote == IZQ )
+<a name="l00079"></a>00079       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00080"></a>00080    despues = Estado( IZQ, IZQ, antes.oveja, antes.forraje, IZQ );
+<a name="l00081"></a>00081    <span class="keywordflow">return</span> despues.valido();
+<a name="l00082"></a>00082 }
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084 <span class="comment">// El hombre y la oveja a la orilla derecha</span>
+<a name="l00085"></a>00085 <span class="keywordtype">bool</span> ho_der(<span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00086"></a>00086    <span class="keywordflow">if</span> ( antes.hombre == DER || antes.oveja == DER || antes.bote == DER )
+<a name="l00087"></a>00087       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00088"></a>00088    despues = Estado( DER, antes.lobo, DER, antes.forraje, DER );
+<a name="l00089"></a>00089    <span class="keywordflow">return</span> despues.valido();
+<a name="l00090"></a>00090 }
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092 <span class="keywordtype">bool</span> ho_izq( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00093"></a>00093    <span class="keywordflow">if</span> ( antes.hombre == IZQ || antes.oveja == IZQ || antes.bote == IZQ )
+<a name="l00094"></a>00094       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00095"></a>00095    despues = Estado( IZQ, antes.lobo, IZQ, antes.forraje, IZQ );
+<a name="l00096"></a>00096    <span class="keywordflow">return</span> despues.valido();
+<a name="l00097"></a>00097 }
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 <span class="comment">// El hombre y el forraje a la orilla derecha</span>
+<a name="l00100"></a>00100 <span class="keywordtype">bool</span> hf_der( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00101"></a>00101    <span class="keywordflow">if</span> ( antes.hombre == DER || antes.forraje == DER || antes.bote == DER )
+<a name="l00102"></a>00102       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00103"></a>00103    despues = Estado( DER, antes.lobo, antes.oveja, DER, DER );
+<a name="l00104"></a>00104    <span class="keywordflow">return</span> despues.valido();
+<a name="l00105"></a>00105 }
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 <span class="keywordtype">bool</span> hf_izq( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00108"></a>00108    <span class="keywordflow">if</span> ( antes.hombre == IZQ || antes.forraje == IZQ || antes.bote == IZQ )
+<a name="l00109"></a>00109       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00110"></a>00110    despues = Estado( IZQ, antes.lobo, antes.oveja, IZQ, IZQ );
+<a name="l00111"></a>00111    <span class="keywordflow">return</span> despues.valido();
+<a name="l00112"></a>00112 }
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115 <span class="keywordtype">int</span> main() {
+<a name="l00116"></a>00116    <a name="_a28"></a><a class="code" href="structia_1_1_operaciones.html">Operaciones&lt;Estado&gt;</a> operaciones;
+<a name="l00117"></a>00117    <a name="_a29"></a><a class="code" href="structia_1_1_nombres_operadores.html">NombresOperadores&lt;Estado&gt;</a> nombres;
+<a name="l00118"></a>00118    operaciones.push_back( &amp;ho_der ); nombres[&amp;ho_der] = <span class="stringliteral">"Hombre y oveja a la derecha"</span>;
+<a name="l00119"></a>00119    operaciones.push_back( &amp;ho_izq ); nombres[&amp;ho_izq] = <span class="stringliteral">"Hombre y oveja a la izquierda"</span>;
+<a name="l00120"></a>00120    operaciones.push_back( &amp;hf_der ); nombres[&amp;hf_der] = <span class="stringliteral">"Hombre y forraje a la derecha"</span>;
+<a name="l00121"></a>00121    operaciones.push_back( &amp;hf_izq ); nombres[&amp;hf_izq] = <span class="stringliteral">"Hombre y forraje a la izquierda"</span>;
+<a name="l00122"></a>00122    operaciones.push_back( &amp;h_der ); nombres[&amp;h_der] = <span class="stringliteral">"Hombre a la derecha"</span>;
+<a name="l00123"></a>00123    operaciones.push_back( &amp;h_izq ); nombres[&amp;h_izq] = <span class="stringliteral">"Hombre a la izquierda"</span>;
+<a name="l00124"></a>00124    operaciones.push_back( &amp;hl_der ); nombres[&amp;hl_der] = <span class="stringliteral">"Hombre y lobo a la derecha"</span>;
+<a name="l00125"></a>00125    operaciones.push_back( &amp;hl_izq ); nombres[&amp;hl_izq] = <span class="stringliteral">"Hombre y lobo a la izquierda"</span>;
+<a name="l00126"></a>00126    
+<a name="l00127"></a>00127    Estado inicial(IZQ,IZQ,IZQ,IZQ,IZQ); <span class="comment">// Todos en la orilla izquierda</span>
+<a name="l00128"></a>00128    
+<a name="l00129"></a>00129    <a name="a30"></a><a class="code" href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e">mostrar_solucion</a>(inicial, <a name="a31"></a><a class="code" href="group__detalle__implementacion.html#g146585979cd3482b56bb8ed8aadcdcd7">preferencia_amplitud</a>(operaciones, inicial), nombres );
+<a name="l00130"></a>00130    <a name="a32"></a><a class="code" href="group__salida.html#g641d63b8b871dd3886aec1ddb3250563">mostrar_estadisticas</a>();
+<a name="l00131"></a>00131    
+<a name="l00132"></a>00132    <a class="code" href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e">mostrar_solucion</a>(inicial, <a name="a33"></a><a class="code" href="group__detalle__implementacion.html#gc576de7ced520b771831a409bc671363">profundidad_limitada</a>(operaciones, inicial, 18 ), nombres );
+<a name="l00133"></a>00133    <a class="code" href="group__salida.html#g641d63b8b871dd3886aec1ddb3250563">mostrar_estadisticas</a>();
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135    <a class="code" href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e">mostrar_solucion</a>(inicial, <a name="a34"></a><a class="code" href="group__algoritmos.html#g4e950218e635de0baf0e635bc0d1acef">profundidad_iterativa</a>(operaciones, inicial, 18 ), nombres );
+<a name="l00136"></a>00136    <a class="code" href="group__salida.html#g641d63b8b871dd3886aec1ddb3250563">mostrar_estadisticas</a>();
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138    system(<span class="stringliteral">"PAUSE"</span>);
+<a name="l00139"></a>00139 }
+</pre></div> <hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:37 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Uso general</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1><a class="anchor" name="uso_general">Uso general</a></h1>Las funciones de búsqueda estan en el namespace <a class="el" href="namespaceia.html">ia</a> y son así: (las que estan en el namespace <a class="el" href="namespaceia_1_1detalle.html">ia::detalle</a> son internas y no es necesario llamarlas directamente)<p>
+<div class="fragment"><pre class="fragment"> <span class="keyword">template</span>&lt; [...] &gt;
+ nombre_funcion(<span class="keyword">const</span> Operaciones_t &amp;operaciones, <span class="keyword">const</span> Estado_t &amp;inicial, [...], (<span class="keywordtype">bool</span>*)registrar_solucion( [...] ) ); 
+</pre></div> No te preocupes por lo de <code>template</code>, para llamar a las funciones no necesitas especificar ninguno de esos tipos, eso se hará automáticamente (excepto con Microsoft VC Toolkit y VC NET 2003). El primer parámetro siempre es una <a class="el" href="uso_general.html#operaciones">Lista de operaciones</a> y el segundo un <a class="el" href="uso_general.html#estados">Estado inicial</a>. <h2><a class="anchor" name="operaciones">
+Lista de operaciones</a></h2>
+Las funciones de búsqueda reciben siempre como primer parámetro un contenedor secuencial de las operaciones que se pueden aplicar a los estados para expandirlos. Esta secuencia puede ser una secuencia (p.e. un <code>vector</code>) de punteros a las funciones que se pueden usar para hacer expansiones, también puede ser una secuencia (p.e. un <code>vector</code>) de punteros a una clase base (normalmente <code>ia::Operacion&lt;Estado&gt;</code>) cuyos herederos definen al operador de paréntesis ( <code>operator()</code> ). Ten en cuenta que el uso de una clase base para las operaciones implica una llamada a una función virtual (al <code>operator()</code> ) y esto equivale a dos indirecciones, es preferible utilizar una sola clase cuyas distintas instancias ejecuten de distinta manera a su <code>operator()</code> <h3><a class="anchor" name="funciones">
+Operaciones como funciones</a></h3>
+La lista de operaciones para expandir estados puede ser una secuencia de punteros a funciones (en este caso las funciones son <code>mi_operacion1</code> y <code>mi_operacion2</code>), así: <div class="fragment"><pre class="fragment"><span class="preprocessor"> #include "<a class="code" href="ia__ciega_8h.html">ia_ciega.h</a>"</span>
+ <span class="keyword">using namespace </span>std;
+ <span class="keyword">struct </span>Estado {
+    <span class="comment">// Después se indica cómo debe ser esta estructura ...</span>
+ };
+ 
+ <span class="keywordtype">bool</span> mi_operacion1( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues ) {...}
+ <span class="keywordtype">bool</span> mi_operacion2( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {...}
+ <span class="comment">// ... etc</span>
+ <span class="keywordtype">int</span> main() {
+     Operaciones&lt;Estado&gt; operaciones;
+     NombresOperadores&lt;Estado&gt; nombres;
+     operaciones.push_back( &amp;mi_operacion1 ); 
+     nombres[ &amp;mi_operacion1] = <span class="stringliteral">"Mi operacion 1"</span>;
+     operaciones.push_back( &amp;mi_operacion2 ); 
+     nombres[ &amp;mi_operacion2] = <span class="stringliteral">"Mi operacion segunda"</span>;
+     <span class="comment">//...</span>
+     <span class="comment">// Establecer el estado inicial</span>
+     Estado inicial(3,4);
+     <span class="comment">// llamar a la función de búsqueda deseada...</span>
+     <a class="code" href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e">mostrar_solucion</a>( inicial, <a class="code" href="group__algoritmos.html#g4e950218e635de0baf0e635bc0d1acef">profundidad_iterativa</a>( operaciones, inicial, 11), nombres );
+     <span class="comment">// etc...</span>
+ }
+</pre></div><p>
+Fijate cómo usamos las estructuras auxiliares <code>Operaciones</code> y <code>NombresOperadores</code> dando el parámetro Estado.<p>
+Cada una de las funciones mi_operacion1, mi_operacion2, etc, reciben como primer estado el estado actual y deben poner en el segundo parametro es estado resultante de aplicar la operacion. Si no se puede aplicar la operación debe devolver falso, si se puede aplicar debe devolver verdadero. Cuando devuelve falso, no se usará el valor del segundo parámetro fuera de esta funcion, así que se puede dejar como basura.<h3><a class="anchor" name="functores">
+Operaciones como clases (functores)</a></h3>
+Existen dos maneras de trabajar: definir una clase distinta para cada operación (considere usar punteros a funciones), la segunda es la que se explicará aquí, a saber, una sola clase para todas las operaciones, el comportamiento específico de la operación se establece en el constructor de la clase.<p>
+La lista de operaciones para expandir estados puede ser una secuencia de punteros a una clase. En la lista de operaciones se ponen punteros objetos de esta clase, cada instancia ejecuta el <code>operator()</code> de acuerdo a la operacion que realiza, así:<p>
+<div class="fragment"><pre class="fragment">  <span class="keyword">struct </span>Estado {
+     <span class="comment">// Después se indica cómo debe ser esta estructura...</span>
+  };
+  
+  <span class="keyword">class </span>Accion : <span class="keyword">public</span> Operacion&lt;Estado&gt; {
+     ... <span class="comment">// aquí puedes poner los miembros datos de la operacion</span>
+  <span class="keyword">public</span>:
+     Accion(...) {...}
+     <span class="keywordtype">bool</span> operator()(<span class="keyword">const</span> Estado_t&amp; antes, Estado_t&amp; despues)<span class="keyword"> const </span>{
+        ... <span class="comment">// Aplica la operacion de acuerdo a sus miembros dato</span>
+     }
+     
+  }
+</pre></div><p>
+En el constructor se ajustan los miembros datos del objeto, que son los parámetros que definen cómo se realizará la operación<p>
+La clase base utilizada <code>Operacion&lt;Estado&gt;</code> está definida en esta librería y contiene un miembro dato <code>nombre</code> en el que se puede poner el nombre de la operación, así como debería ser mostrada en la solución, alternativamente se puede re-implementar la funcion <code>get_descripción</code>() para mostrar la operacion. Todo esto es opcional y solo es requerido si se utiliza la función mostrar_solucion de esta libreria.<p>
+No es necesario heredar de <code>Operacion&lt;Estado&gt;</code>; pero, se herede o no, se debe declarar el <code>operator()</code> de esta manera en la clase base (en Operacion&lt;Estado&gt; ya esta declarada), y/o implementarla en cada clase (heredera): <div class="fragment"><pre class="fragment"> <span class="keyword">virtual</span> <span class="keywordtype">bool</span> operator()(<span class="keyword">const</span> Estado_t&amp; antes, Estado_t&amp; despues) <span class="keyword">const</span> 
+</pre></div><p>
+este operador debe cumplir con los requisitos especificados anteriormente para las operaciones como funciones, con el requerimiento adicional de que no deben modificar los miembros datos del objeto (por eso es un método <code>const</code> ). Si crees que necesitas cambiar algun miembro dato ten en cuenta que el orden en que se llama al <code>operator()</code> es indefinido, (para que se pueda cambiar un miembro dato <code>m</code> de tipo <code>Tipo</code> este debería ser declarado como <code>mutable</code>, así: <code>mutable</code> <code>Tipo</code> <code>m</code>; )<p>
+Las funciones de búsqueda solo utilizaran los objetos pasados en la lista de operaciones, no crearán nuevas instancias.<p>
+El ejemplo de las 8 reinas (reinas.cpp) hace uso de esta técnica, dandole en el constructor la fila en que debe poner una reina cada instancia de una misma clase.<h2><a class="anchor" name="estados">
+Estado inicial</a></h2>
+El segundo parámetro de las funciones de búsqueda es el estado inicial desde el que se empieza la búsqueda.<p>
+Un estado es una estructura (o clase) con esta interfaz: <div class="fragment"><pre class="fragment"> <span class="keyword">struct </span>Estado {
+   <span class="comment">// ... aquí puedes poner los atributos de tu estado</span>
+   Estado() {...} <span class="comment">// Un constructor por defecto, Normalmete no hará nada</span>
+   ... <span class="comment">// aquí puedes poner otros constructores</span>
+   <span class="comment">// Debe devolver true ssi es un estado meta</span>
+   <span class="keywordtype">bool</span> es_meta()<span class="keyword"> const </span>{
+      ...
+   }
+   <span class="comment">// Un operador menor que, de orden debil estricto, para que pueda estar en un std::set</span>
+   <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> Estado&amp; otro)<span class="keyword"> const </span>{
+      ...
+   }
+   <span class="comment">// Devuelve una cadena con la especificación del estado (opcional)</span>
+   <span class="keyword">friend</span> ostream&amp; operator&lt;&lt;(ostream&amp; os, <span class="keyword">const</span> Estado&amp; e ) {
+      os &lt;&lt; ... ;
+      <span class="keywordflow">return</span> os;
+   }
+ };
+</pre></div> El constructor por defecto y todas estos métodos (excepto el <code>operator&lt;&lt;</code>) deberían terminar rápido porque son llamados varias veces durante las búsquedas. Los estados construidos con el constructor por defecto se usan solamente para ser el segundo parámetro de las funciones que se usan para expandir estados (o del <code>operator()</code> si son functores) así que su inicialización puede hacerse en la función u <code>operator()</code>,<p>
+<code>es_meta()</code> se llama en todos los estados generados.<p>
+<code>operator&lt;</code> se usa para poner al estado en un <code>std::set</code> de estados visitados, debe ser un strict weak ordering como se define en la STL, es decir que si a &lt; b entonces es falso que b &lt; a, y si a &lt; b y b &lt; c entonces a &lt; c. Dos estados A y B se considerarán equivalentes (es decir solo se explorará uno) si es falso que A &lt; B y es falso que B &lt; A.<p>
+<code>operator&lt;&lt;</code> se usa en mostrar_solucion con dos parámetros, así que no afecta a la velocidad de las funciones de búsqueda<h2><a class="anchor" name="registrar_solucion">
+Uso del parámetro registrar_solucion</a></h2>
+Los algorítmos de búsqueda reciben, opcionalmente, un parámetro registrar_solucion que es un puntero a una función que se llamará cada vez que se encuentre una solución. Es una función "callback" aquí se describe cómo se usa.<p>
+La funcion puede ser así <div class="fragment"><pre class="fragment"> <span class="keywordtype">bool</span> registrar_solucion(<span class="keyword">const</span> vector&lt;X&gt;&amp; ruta, <span class="keyword">const</span> Estado&amp; estado)
+</pre></div> donde X es el tipo de las operaciones puestas inicialmente en el contenedor de operaciones que se pueden aplicar (que pueden ser punteros a objetos funcion (o sea, a functores) o punteros a funciones).<p>
+Todas las búsquedas terminarán al encontrar la primera solución, si desea continuar la búsqueda de más soluciones debe implementar esta función y pasar un puntero a ella a la función de búsqueda que use, la búsqueda llamará a su función cada vez que halle una solución. Si desea que la búsqueda continue devuelva true, si desea terminarla devuelva false en este último caso la función de búsqueda originalmente llamada devolverá la solución que se acaba de hallar; por otra parte, si su función registrar_solucion siempre devuelve true eventualmente la función de búsqueda terminará devolviendo una ruta vacía.<p>
+En el primer parámetro recibirá un vector con punteros a las operaciones que se hicieron para encontrar la meta recién hallada; en el segundo parámetro estará el estado meta que se halló.<p>
+Por ejemplo, si las operaciones se dieron usando el tipo auxiliar Operaciones&lt;Estado&gt; (o sea, usando punteros a funciones) entonces ruta sera de tipo <code>vector&lt;bool(*)</code>(const Estado&amp;, Estado&amp;)&gt; , es decir un vector de punteros a las funciones que se aplicaron al estado inicial para llegar al estado meta dado como segundo parámetro.<p>
+<hr>
+<p>
+Vaya a la pestaña Módulos y elija Algoritmos de búsqueda para obtener ayuda sobre una función de búsqueda en particular <hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:37 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

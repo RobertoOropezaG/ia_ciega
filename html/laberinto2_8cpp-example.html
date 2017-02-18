@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: laberinto2.cpp</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1>laberinto2.cpp</h1>Usa punteros a funciones para encontrar la solucion a un laberinto ingresado por entrada estandar, poniendo la solucion en salida estandar. Demuestra el uso del contenedor <code>SecuenciaEstados</code> para convertir las operaciones devueltas como solucion en los estados intermedios<p>
+Una buena manera de usarlo es poner el laberinto en un archivo de texto. Tal archivo debe usar el caracter # para las paredes, la entrada del laberinto es el único espacio de la primera fila y la salida el único espacio en en la última fila. La primera y última columna consisten de solo paredes (#)<p>
+Si el laberinto esta en el archivo laberinto.txt y se quiere la solucion en el arcivo solucion.txt en la linea de comandos del sistema ponga: <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001  c:\...&gt; type laberinto.txt | laberinto2.exe &gt; solucion.txt
+</pre></div> El archivo de solucion consiste en el mismo laberinto pero con el caracter + marcando el camino.<p>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00004"></a>00004 <span class="preprocessor">#define IA_NO_CRONOMETRAR</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor">#include "../include/ia_ciega.h"</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="keyword">using namespace </span>std;
+<a name="l00008"></a>00008 <span class="keyword">using namespace </span>ia;
+<a name="l00009"></a>00009    
+<a name="l00011"></a>00011 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> MAX_COLUMNAS = 0, MAX_FILAS = 0;
+<a name="l00012"></a>00012 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> FILA_INICIO = 0, COLUMNA_INICIO = 0, FILA_FIN = 0, COLUMNA_FIN = 0;
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="keyword">typedef</span> vector&lt;string&gt; Laberinto;
+<a name="l00015"></a>00015 Laberinto laberinto;
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 ostream&amp; operator&lt;&lt;(ostream&amp; os, <span class="keyword">const</span> Laberinto&amp; lab) {
+<a name="l00018"></a>00018    <span class="keywordflow">for</span>( <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; lab.size(); ++ i )
+<a name="l00019"></a>00019       os &lt;&lt; lab[i] &lt;&lt; <span class="stringliteral">"\n"</span>;
+<a name="l00020"></a>00020    os &lt;&lt; <span class="stringliteral">"\n"</span>; 
+<a name="l00021"></a>00021    <span class="keywordflow">return</span> os;
+<a name="l00022"></a>00022 }
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="keyword">struct </span>Estado {
+<a name="l00025"></a>00025    <span class="comment">//      fila     , columna </span>
+<a name="l00026"></a>00026    pair&lt;unsigned int, unsigned int&gt; posicion;
+<a name="l00027"></a>00027    Estado() {}
+<a name="l00028"></a>00028    Estado( pair&lt;unsigned int, unsigned int&gt; pos ) : posicion(pos) {}
+<a name="l00029"></a>00029    <span class="keywordtype">bool</span> operator&lt;( <span class="keyword">const</span> Estado&amp; otro )<span class="keyword"> const </span>{
+<a name="l00030"></a>00030       <span class="keywordflow">return</span> posicion &lt; otro.posicion;
+<a name="l00031"></a>00031    }
+<a name="l00033"></a>00033    <span class="keyword">friend</span> ostream&amp; operator&lt;&lt;( ostream&amp; os, <span class="keyword">const</span> Estado&amp; e) {
+<a name="l00034"></a>00034       os &lt;&lt; <span class="stringliteral">"("</span> &lt;&lt; e.posicion.first &lt;&lt; <span class="stringliteral">","</span> &lt;&lt; e.posicion.second &lt;&lt; <span class="stringliteral">") "</span>;
+<a name="l00035"></a>00035       <span class="keywordflow">return</span> os;
+<a name="l00036"></a>00036    }
+<a name="l00038"></a>00038    <span class="keyword">friend</span> Laberinto&amp; operator&lt;&lt;( Laberinto&amp; lab, <span class="keyword">const</span> Estado&amp; e) {
+<a name="l00039"></a>00039       lab[e.posicion.first][e.posicion.second] = <span class="charliteral">'+'</span>;
+<a name="l00040"></a>00040       <span class="keywordflow">return</span> lab;
+<a name="l00041"></a>00041    }
+<a name="l00042"></a>00042 };
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="keywordtype">bool</span> arriba( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues ) {
+<a name="l00045"></a>00045    <span class="keywordflow">if</span> ( antes.posicion.first == 0 || laberinto[antes.posicion.first - 1][antes.posicion.second] != <span class="charliteral">' '</span> ) 
+<a name="l00046"></a>00046       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00047"></a>00047    despues.posicion.first = antes.posicion.first - 1;
+<a name="l00048"></a>00048    despues.posicion.second = antes.posicion.second;
+<a name="l00049"></a>00049    <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00050"></a>00050 }
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052 <span class="keywordtype">bool</span> abajo( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues ) {
+<a name="l00053"></a>00053    <span class="keywordflow">if</span> ( antes.posicion.first == MAX_FILAS - 1 || laberinto[antes.posicion.first + 1][antes.posicion.second] != <span class="charliteral">' '</span> )
+<a name="l00054"></a>00054       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00055"></a>00055    despues.posicion.first = antes.posicion.first + 1;
+<a name="l00056"></a>00056    despues.posicion.second = antes.posicion.second;
+<a name="l00057"></a>00057    <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00058"></a>00058 }
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 <span class="keywordtype">bool</span> izquierda( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00061"></a>00061    <span class="keywordflow">if</span> ( antes.posicion.second == 0 || laberinto[antes.posicion.first][antes.posicion.second - 1] != <span class="charliteral">' '</span> )
+<a name="l00062"></a>00062       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00063"></a>00063    despues.posicion.first = antes.posicion.first;
+<a name="l00064"></a>00064    despues.posicion.second = antes.posicion.second - 1;
+<a name="l00065"></a>00065    <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00066"></a>00066 }
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068 <span class="keywordtype">bool</span> derecha( <span class="keyword">const</span> Estado&amp; antes, Estado&amp; despues) {
+<a name="l00069"></a>00069    <span class="keywordflow">if</span> ( antes.posicion.second == MAX_COLUMNAS - 1 || laberinto[antes.posicion.first][antes.posicion.second + 1] != <span class="charliteral">' '</span> )
+<a name="l00070"></a>00070       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00071"></a>00071    despues.posicion.first = antes.posicion.first;
+<a name="l00072"></a>00072    despues.posicion.second = antes.posicion.second + 1;
+<a name="l00073"></a>00073    <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00074"></a>00074 }
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 <span class="comment">// Carga un laberinto de un archivo de texto. Es un poco larga porque verificamos que el archivo tenga el formato correcto</span>
+<a name="l00077"></a>00077 <span class="keywordtype">void</span> cargar_laberinto() {
+<a name="l00078"></a>00078    string linea, linea_anterior;
+<a name="l00079"></a>00079    <span class="keywordtype">int</span> cuenta = 0;
+<a name="l00080"></a>00080    <span class="keywordflow">while</span> ( getline(cin, linea) ) {
+<a name="l00081"></a>00081       <span class="keywordflow">if</span> ( ! cuenta ) { <span class="comment">// si es la primera linea, buscamos el punto inicio</span>
+<a name="l00082"></a>00082          <span class="keywordflow">for</span>( <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c = 0; c &lt; linea.size(); ++ c )
+<a name="l00083"></a>00083             <span class="keywordflow">if</span> ( linea[c] == <span class="charliteral">' '</span> )
+<a name="l00084"></a>00084                COLUMNA_INICIO = c;
+<a name="l00085"></a>00085       }<span class="keywordflow">else</span> <span class="keywordflow">if</span> ( linea.size() == 0 ){
+<a name="l00086"></a>00086          <span class="keywordflow">while</span> ( getline(cin,linea) )
+<a name="l00087"></a>00087             <span class="keywordflow">if</span> (linea.size() &gt; 0 ) {
+<a name="l00088"></a>00088                cerr &lt;&lt; <span class="stringliteral">"ERROR: La linea "</span> &lt;&lt; cuenta + 1 &lt;&lt; <span class="stringliteral">" esta en blanco.\n"</span>;
+<a name="l00089"></a>00089                exit(1);
+<a name="l00090"></a>00090             }
+<a name="l00091"></a>00091          <span class="keywordflow">break</span>;
+<a name="l00092"></a>00092       }<span class="keywordflow">else</span> <span class="keywordflow">if</span> ( linea.size() != linea_anterior.size() ) {
+<a name="l00093"></a>00093          cerr &lt;&lt; <span class="stringliteral">"ERROR: La linea "</span> &lt;&lt; cuenta + 1 &lt;&lt; <span class="stringliteral">" tiene una cantidad distinta de caracteres.\n"</span> &lt;&lt; <span class="stringliteral">"(anterior:"</span> &lt;&lt; linea_anterior.size() &lt;&lt; <span class="stringliteral">" esta:"</span> &lt;&lt; linea.size() &lt;&lt; <span class="stringliteral">"\n"</span>;
+<a name="l00094"></a>00094          exit(1);
+<a name="l00095"></a>00095       }
+<a name="l00096"></a>00096       laberinto.push_back( linea );
+<a name="l00097"></a>00097       linea_anterior = linea;
+<a name="l00098"></a>00098       cuenta++;
+<a name="l00099"></a>00099    }
+<a name="l00100"></a>00100    <span class="comment">// buscamos el punto de la meta</span>
+<a name="l00101"></a>00101    <span class="keywordflow">for</span> ( <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c = 0; c &lt; linea_anterior.size(); ++ c )
+<a name="l00102"></a>00102       <span class="keywordflow">if</span> ( linea_anterior[c] == <span class="charliteral">' '</span> ) {
+<a name="l00103"></a>00103          COLUMNA_FIN = c;
+<a name="l00104"></a>00104          <span class="keywordflow">break</span>;
+<a name="l00105"></a>00105       }
+<a name="l00106"></a>00106    MAX_COLUMNAS = linea_anterior.size();
+<a name="l00107"></a>00107    MAX_FILAS = cuenta;
+<a name="l00108"></a>00108    FILA_FIN = MAX_FILAS - 1;
+<a name="l00109"></a>00109    FILA_INICIO = 0;
+<a name="l00110"></a>00110    <span class="keywordflow">if</span> ( MAX_COLUMNAS &lt; 3 || MAX_FILAS &lt; 3 ) {
+<a name="l00111"></a>00111       cout &lt;&lt; <span class="stringliteral">"Es un laberinto demasiado pequeño!!"</span>;
+<a name="l00112"></a>00112       exit(1);
+<a name="l00113"></a>00113    }<span class="keywordflow">else</span> <span class="keywordflow">if</span> ( COLUMNA_INICIO == 0 || COLUMNA_FIN == 0 ) {
+<a name="l00114"></a>00114       cout &lt;&lt; <span class="stringliteral">"No se encontró el punto de partida o la meta"</span>;
+<a name="l00115"></a>00115       exit(1);
+<a name="l00116"></a>00116    }
+<a name="l00117"></a>00117 }
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119 <span class="keywordtype">int</span> main() {
+<a name="l00120"></a>00120    cargar_laberinto();
+<a name="l00121"></a>00121    
+<a name="l00122"></a>00122    <a name="_a20"></a><a class="code" href="structia_1_1_operaciones.html">Operaciones&lt;Estado&gt;</a> operaciones;
+<a name="l00123"></a>00123    <a name="_a21"></a><a class="code" href="structia_1_1_nombres_operadores.html">NombresOperadores&lt;Estado&gt;</a> nombres;
+<a name="l00124"></a>00124    <a name="_a22"></a><a class="code" href="structia_1_1_operadores_inversos.html">OperadoresInversos&lt; Operaciones&lt;Estado&gt;</a> &gt; inversas;
+<a name="l00125"></a>00125    
+<a name="l00126"></a>00126    operaciones.push_back( &amp;izquierda ); inversas[ &amp;izquierda ] = &amp;derecha;
+<a name="l00127"></a>00127    operaciones.push_back( &amp;derecha ); 
+<a name="l00128"></a>00128    operaciones.push_back( &amp;arriba ); inversas[ &amp;arriba ] = &amp;abajo;
+<a name="l00129"></a>00129    operaciones.push_back( &amp;abajo ); 
+<a name="l00130"></a>00130    
+<a name="l00131"></a>00131    Estado <span class="keyword">final</span>( make_pair(FILA_INICIO, COLUMNA_INICIO) );
+<a name="l00132"></a>00132    Estado inicial( make_pair(FILA_FIN, COLUMNA_FIN) );
+<a name="l00133"></a>00133    
+<a name="l00134"></a>00134    cerr &lt;&lt; <span class="stringliteral">"Buscando..."</span>;
+<a name="l00135"></a>00135    pair&lt; vector&lt; Operaciones&lt;Estado&gt;::value_type &gt;, vector&lt; Operaciones&lt;Estado&gt;::value_type &gt; &gt; solucion;
+<a name="l00136"></a>00136    <span class="keywordflow">try</span> {
+<a name="l00137"></a>00137       <span class="comment">// borland se cuelga con 1019 y da con 1018</span>
+<a name="l00138"></a>00138       solucion = <a name="a23"></a><a class="code" href="group__detalle__implementacion.html#gd52da0628461fbda96aac48a75f29122">profundidad_limitada_doble</a>( operaciones, inicial, <span class="keyword">final</span>, 6000);
+<a name="l00139"></a>00139    }<span class="keywordflow">catch</span>(...){
+<a name="l00140"></a>00140       cerr &lt;&lt; <span class="stringliteral">"Excepcion"</span>;
+<a name="l00141"></a>00141    }
+<a name="l00142"></a>00142    cerr &lt;&lt; solucion.first.size() &lt;&lt; <span class="stringliteral">","</span> &lt;&lt; solucion.second.size() &lt;&lt; <span class="stringliteral">"\n"</span>;
+<a name="l00143"></a>00143    cerr &lt;&lt; <span class="stringliteral">"Finalizado\n"</span>;
+<a name="l00144"></a>00144    vector&lt; Operaciones&lt;Estado&gt;::value_type&gt; solucion_simple = <a name="a24"></a><a class="code" href="namespaceia.html#4a68a7ab04b3254c2db2bd160bf6aadf">simplificar_bidireccional</a>( solucion, inversas.<a name="a25"></a><a class="code" href="structia_1_1_operadores_inversos.html#d504dca40326ee82e5e1abee8dce732c">complementar</a>() );
+<a name="l00145"></a>00145    cerr &lt;&lt; <span class="stringliteral">"Se simplifico la solucion bi-direccional a uni-direccional:\n"</span>;
+<a name="l00146"></a>00146    cout &lt;&lt; solucion_simple.size() &lt;&lt; <span class="stringliteral">"\n"</span>;
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148    <a name="_a26"></a><a class="code" href="classia_1_1_secuencia_estados.html">SecuenciaEstados&lt;Estado, Operaciones&lt;Estado&gt;</a> &gt; estados_intermedios(inicial, solucion_simple );
+<a name="l00149"></a>00149    cerr &lt;&lt; <span class="stringliteral">"Se obtuvieron los estado intermedios\n"</span>;
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151    <a name="a27"></a><a class="code" href="group__salida.html#g25dbda0de5763d83f28ebfb20a885f3e">mostrar_solucion</a>( inicial, solucion_simple, nombres );
+<a name="l00152"></a>00152    <span class="keywordtype">int</span> x = 0;
+<a name="l00153"></a>00153    <span class="keywordflow">for</span>( <a class="code" href="classia_1_1_secuencia_estados.html">SecuenciaEstados</a>&lt;Estado, <a class="code" href="structia_1_1_operaciones.html">Operaciones&lt;Estado&gt;</a> &gt;::iterator it = estados_intermedios.begin(); it != estados_intermedios.end(); ++ it ) {
+<a name="l00154"></a>00154       cout &lt;&lt; x &lt;&lt; <span class="stringliteral">"-"</span>;
+<a name="l00155"></a>00155       laberinto &lt;&lt; *it;
+<a name="l00156"></a>00156       cout &lt;&lt; x ++ &lt;&lt; <span class="stringliteral">" "</span>;;
+<a name="l00157"></a>00157    }
+<a name="l00158"></a>00158    cerr &lt;&lt; <span class="stringliteral">"Se anoto la solucion en el laberinto\n"</span>;
+<a name="l00159"></a>00159    cout &lt;&lt; <span class="stringliteral">"\n\n"</span>;
+<a name="l00160"></a>00160    cout &lt;&lt; laberinto;
+<a name="l00161"></a>00161 }    
+<a name="l00162"></a>00162                    
+</pre></div> <hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:37 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

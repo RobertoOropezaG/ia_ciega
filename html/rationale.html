@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Rationale</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1><a class="anchor" name="rationale">Rationale</a></h1><b>Se usan otras funciones para llamar a las que estan en el namespace <a class="el" href="namespaceia_1_1detalle.html">ia::detalle</a></b> porque las que estan en detalle necesitan más parámetros que los que el llamador quisiera llenar con información de su propio problema, por otra parte el paso de parámetros en la primera llamada a las funciones de detalle deben cumplir varios requerimientos que al llamador solamente le dificultarian su uso.<p>
+<b>Se prefiere usar plantillas y no usar funciones virtuales para la realización de operaciones y la comparación de estados</b> porque una llamada a una función virtual es un poco mas lenta que la llamada a funciones no-virtuales. Esto tiene más importancia porque la función virtual sería llamada en un ciclo interno durante las búsquedas<p>
+<b>Se usa el lenguaje C++</b> porque tiene las siguientes características necesarias para esta librería, y no se encuentran en otros lenguajes: 1) Plantillas, no solo a nivel de contenedores, si no de operadores, por ejemplo para usar la misma función con functores y funciones. 2) Preprocesador, para poder deshabilitar capacidades y así ganar velocidad. 3) Generación de código eficiente, debido a que el código es ejecutado directamente por el hardware. 4) Librerias estandarizadas con variedad de estructuras de datos, algoritmos ortogonales a las estructuras de datos.<p>
+<b>Se utilizan macros del preprocesador para deshabilitar el cálculo de estadísticas y registro de soluciones</b> porque de esta forma una vez deshabilitadas permitirán un funcionamiento tan rápido como si nunca hubiera habido posibilidad de utilizar tales características. (No es necesario evaluar un booleano para tomar la decisión de usarlas).<p>
+Para ver detalles específicos de la implementacion consulte la siguiente sección <a class="el" href="detalles.html">Detalles de implementacion</a> y el código fuente, que tiene muchos comentarios explicativos que no aparecen en este manual. <hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:37 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

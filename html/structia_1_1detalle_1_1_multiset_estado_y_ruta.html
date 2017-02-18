@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Referencia de la Estructura ia::detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt;</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li id="current"><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<div class="tabs">
+  <ul>
+    <li><a href="annotated.html"><span>Lista&nbsp;de&nbsp;componentes</span></a></li>
+    <li><a href="hierarchy.html"><span>Jerarquía&nbsp;de&nbsp;la&nbsp;clase</span></a></li>
+    <li><a href="functions.html"><span>Miembros&nbsp;de&nbsp;las&nbsp;clases</span></a></li>
+  </ul></div>
+<div class="nav">
+<a class="el" href="namespaceia.html">ia</a>::<a class="el" href="namespaceia_1_1detalle.html">detalle</a>::<a class="el" href="structia_1_1detalle_1_1_multiset_estado_y_ruta.html">MultisetEstadoYRuta</a></div>
+<h1>Referencia de la Estructura ia::detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt;<br>
+<small>
+[<a class="el" href="group__detalle__implementacion.html">Detalles de implementación</a>]</small>
+</h1><!-- doxytag: class="ia::detalle::MultisetEstadoYRuta" --><!-- doxytag: inherits="std::multiset&lt; pair&lt; Estado_t, Ruta_t &gt;, Comparador_mejor_t &gt;" --><code>#include &lt;<a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>&gt;</code>
+<p>
+Herencias std::multiset&lt; pair&lt; Estado_t, Ruta_t &gt;, Comparador_mejor_t &gt;.
+<p>
+<a href="structia_1_1detalle_1_1_multiset_estado_y_ruta-members.html">Lista de todos los miembros.</a><hr><a name="_details"></a><h2>Descripción detallada</h2>
+<h3>template&lt;typename Estado_t, typename Ruta_t, typename Comparador_mejor_t&gt;<br>
+ struct ia::detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt;</h3>
+
+Alias para tener varios estados ordenados de acuerdo a cierto criterio (dado por Comparador_mejor_t), cada uno asociado con las operaciones realizadas para llegar a él (o sea, su ruta). 
+<p>
+Ya que es un multiset es necesario que comparador_t sea un functor que sea un strict-weak-ordering (como se define para la STL), sin embargo no es necesario que si no(a &lt; b) y no(b &lt; a) entonces a y b representen al mismo estado, por otra parte el resultado del functor debe ser determinístico 
+<p>
+
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00635">635</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+</table>
+<hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:38 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

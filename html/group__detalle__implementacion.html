@@ -1,0 +1,495 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Detalles de implementación</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<h1>Detalles de implementación</h1>
+<p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Namespaces</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">namespace &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceia_1_1detalle.html">ia::detalle</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Contiene detalles de implementación y la implementacion de los algoritmos de IA. <br></td></tr>
+
+<p>
+<tr><td colspan="2"><br><h2>Clases</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classia_1_1_secuencia_estados_1_1iterator.html">ia::SecuenciaEstados&lt; Estado_t, Operaciones_t &gt;::iterator</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Este iterador es el que da al contenedor <a class="el" href="classia_1_1_secuencia_estados.html">SecuenciaEstados</a> todas las características mencionadas en su descripción.  <a href="classia_1_1_secuencia_estados_1_1iterator.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_estado_y_ruta.html">ia::detalle::EstadoYRuta&lt; Estado_t, Operaciones_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Alias para contener varios estados cada uno con las operaciones realizadas para llegar a él (o sea, su ruta).  <a href="structia_1_1detalle_1_1_estado_y_ruta.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_set_estado_y_ruta.html">ia::detalle::SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Alias para tener varios estados ordenados de acuerdo a cierto criterio (dado por Comparador_t), cada uno asociado con las operaciones realizadas para llegar a él (o sea, su ruta).  <a href="structia_1_1detalle_1_1_set_estado_y_ruta.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_multiset_estado_y_ruta.html">ia::detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Alias para tener varios estados ordenados de acuerdo a cierto criterio (dado por Comparador_mejor_t), cada uno asociado con las operaciones realizadas para llegar a él (o sea, su ruta).  <a href="structia_1_1detalle_1_1_multiset_estado_y_ruta.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1detalle_1_1_compara_estados_ignorando_rutas.html">ia::detalle::ComparaEstadosIgnorandoRutas&lt; Estado_t, T &gt;</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Functor auxiliar que compara un par &lt;estado, ruta&gt; tomando en cuenta solamente el estado.  <a href="structia_1_1detalle_1_1_compara_estados_ignorando_rutas.html#_details">Más...</a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structia_1_1_enlaces_1_1_auxiliar__costo__asignable__t.html">ia::Enlaces&lt; Nodo_t, Iterador_t, Costo_t &gt;::Auxiliar_costo_asignable_t</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Se utiliza para que el usuario pueda asignar el costo a un enlace de manera intuitiva.  <a href="structia_1_1_enlaces_1_1_auxiliar__costo__asignable__t.html#_details">Más...</a><br></td></tr>
+<tr><td colspan="2"><br><h2>Definiciones</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="g2ca880b75037a67e30bc43fac3a2d7f8"></a><!-- doxytag: member="detalle_implementacion::IA_IF_DEVUELVE_FALSO_REGISTRAR_SOLUCION" ref="g2ca880b75037a67e30bc43fac3a2d7f8" args="(ruta, estado)" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#g2ca880b75037a67e30bc43fac3a2d7f8">IA_IF_DEVUELVE_FALSO_REGISTRAR_SOLUCION</a>(ruta, estado)&nbsp;&nbsp;&nbsp;if ( ! registrar_solucion || ! (*registrar_solucion)(ruta, estado) )</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Para que podamos poner esta macro en vez del if largo, y que no tenga efecto si se ha deshabilitado el registro de soluciones usando IA_NO_REGISTRAR_SOLUCION. <br></td></tr>
+<tr><td colspan="2"><br><h2>Funciones</h2></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">vector&lt; typename Operaciones_t::value_type &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#g146585979cd3482b56bb8ed8aadcdcd7">ia::detalle::preferencia_amplitud</a> (const Operaciones_t &amp;operaciones, detalle::EstadoYRuta&lt; Estado_t, Operaciones_t &gt; &amp;expansibles, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algorítmo de búsqueda por amplitud, no es recursivo.  <a href="#g146585979cd3482b56bb8ed8aadcdcd7"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">Ruta_t&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#ga81bb2a346107cbfe5debe839f71e5d8">ia::detalle::preferencia_profundidad</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, bool &amp;finalizar, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por profundidad, es recursivo.  <a href="#ga81bb2a346107cbfe5debe839f71e5d8"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">Ruta_t&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#gc576de7ced520b771831a409bc671363">ia::detalle::profundidad_limitada</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, const unsigned int &amp;limite_profundidad, bool &amp;finalizar, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por profundidad limitada, es recursivo pero solo tiene una variable Estado_t en el stack, el resto son estáticas.  <a href="#gc576de7ced520b771831a409bc671363"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t, typename Comparador_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">pair&lt; Ruta_t, bool &gt;&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#gd52da0628461fbda96aac48a75f29122">ia::detalle::profundidad_limitada_doble</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, const unsigned int &amp;limite_profundidad, bool &amp;finalizar, SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;atajos, SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;nuevos_atajos, bool(*registrar_solucion)(vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por profundidad limitada doble, es recursivo pero solo tiene una variable Estado_t en el stack, el resto son estáticas.  <a href="#gd52da0628461fbda96aac48a75f29122"></a><br></td></tr>
+<tr><td class="memTemplParams" nowrap colspan="2">template&lt;typename Comparador_mejor_t, typename Ruta_t, typename Estado_t, typename Operaciones_t&gt; </td></tr>
+<tr><td class="memTemplItemLeft" nowrap align="right" valign="top">Ruta_t&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__detalle__implementacion.html#ge15de63db4b071b0a2e2d1b7b221eefb">ia::detalle::primero_mejor</a> (const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt; &amp;expansibles, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Algoritmo de búsqueda por primero el mejor (A*), no es recursivo.  <a href="#ge15de63db4b071b0a2e2d1b7b221eefb"></a><br></td></tr>
+</table>
+<hr><h2>Documentación de las funciones</h2>
+<a class="anchor" name="g146585979cd3482b56bb8ed8aadcdcd7"></a><!-- doxytag: member="ia::detalle::preferencia_amplitud" ref="g146585979cd3482b56bb8ed8aadcdcd7" args="(const Operaciones_t &amp;operaciones, detalle::EstadoYRuta&lt; Estado_t, Operaciones_t &gt; &amp;expansibles, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))" --><p>
+<table class="mdTable" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="mdPrefix" colspan="4">
+template&lt;typename Estado_t, typename Operaciones_t&gt; </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap valign="top">vector&lt;typename Operaciones_t::value_type&gt; ia::detalle::preferencia_amplitud           </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const Operaciones_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>operaciones</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>detalle::EstadoYRuta&lt; Estado_t, Operaciones_t &gt; &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>expansibles</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>bool(*)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)&nbsp;</td>
+          <td class="mdname" nowrap> <em>registrar_solucion</em></td>
+        </tr>
+        <tr>
+          <td class="md"></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing="5" cellpadding="0" border="0">
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Algorítmo de búsqueda por amplitud, no es recursivo. 
+<p>
+<dl compact><dt><b>Parámetros:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>operaciones</em>&nbsp;</td><td>Todas las operaciones disponibles </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>expansibles</em>&nbsp;</td><td>Lista de estados que hay que expandir inicialmente, normalmente el estado inicial y una ruta vacía </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>registrar_solucion</em>&nbsp;</td><td>Callback que se llamará cada vez que se halle una solución </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Ejemplos: </b></dt><dd>
+<a class="el" href="cantaros_8cpp-example.html#a11">cantaros.cpp</a>, <a class="el" href="pastor_8cpp-example.html#a31">pastor.cpp</a>, y <a class="el" href="viajero_8cpp-example.html#a44">viajero.cpp</a>.</dl>
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00375">375</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.    </td>
+  </tr>
+</table>
+<a class="anchor" name="ga81bb2a346107cbfe5debe839f71e5d8"></a><!-- doxytag: member="ia::detalle::preferencia_profundidad" ref="ga81bb2a346107cbfe5debe839f71e5d8" args="(const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, bool &amp;finalizar, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))" --><p>
+<table class="mdTable" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="mdPrefix" colspan="4">
+template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t&gt; </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap valign="top">Ruta_t ia::detalle::preferencia_profundidad           </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const Operaciones_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>operaciones</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>set&lt; Estado_t &gt; &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>visitados</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>Ruta_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>ruta</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>const Estado_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>actual</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>unsigned int&nbsp;</td>
+          <td class="mdname" nowrap> <em>profundidad</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>bool &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>finalizar</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>bool(*)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)&nbsp;</td>
+          <td class="mdname" nowrap> <em>registrar_solucion</em></td>
+        </tr>
+        <tr>
+          <td class="md"></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing="5" cellpadding="0" border="0">
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Algoritmo de búsqueda por profundidad, es recursivo. 
+<p>
+Además de los parámetros mencionados, si no se ha deshabilitado la obtención de estadísticas, existe un parámetro más llamado profundidad, utilizado para obtener la profundidad máxima que alcanza la búsqueda (esto se hace utilizando macros) <dl compact><dt><b>Parámetros:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>operaciones</em>&nbsp;</td><td>Todas las operaciones disponibles </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>visitados</em>&nbsp;</td><td>Estados que ya se han visitado </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ruta</em>&nbsp;</td><td>Ruta (operaciones realizadas) hasta el estado que se esta explorando </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>actual</em>&nbsp;</td><td>Estado que se esta explorando </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>finalizar</em>&nbsp;</td><td>Vale true ssi es necesario terminar el algoritmo (p.e. el callback indica que se debe detener la búsqueda) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>registrar_solucion</em>&nbsp;</td><td>Callback llamado cada vez que se encuentra una solucion </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Ejemplos: </b></dt><dd>
+<a class="el" href="cantaros_8cpp-example.html#a8">cantaros.cpp</a>.</dl>
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00433">433</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.    </td>
+  </tr>
+</table>
+<a class="anchor" name="ge15de63db4b071b0a2e2d1b7b221eefb"></a><!-- doxytag: member="ia::detalle::primero_mejor" ref="ge15de63db4b071b0a2e2d1b7b221eefb" args="(const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt; &amp;expansibles, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))" --><p>
+<table class="mdTable" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="mdPrefix" colspan="4">
+template&lt;typename Comparador_mejor_t, typename Ruta_t, typename Estado_t, typename Operaciones_t&gt; </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap valign="top">Ruta_t ia::detalle::primero_mejor           </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const Operaciones_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>operaciones</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>set&lt; Estado_t &gt; &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>visitados</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt; &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>expansibles</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>bool(*)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)&nbsp;</td>
+          <td class="mdname" nowrap> <em>registrar_solucion</em></td>
+        </tr>
+        <tr>
+          <td class="md"></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing="5" cellpadding="0" border="0">
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Algoritmo de búsqueda por primero el mejor (A*), no es recursivo. 
+<p>
+<dl compact><dt><b>Parámetros:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>operaciones</em>&nbsp;</td><td>Todas las operaciones disponibles </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>visitados</em>&nbsp;</td><td>Conjunto de estados visitados </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>expansibles</em>&nbsp;</td><td>Conjunto de estados que no se han explorado </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>registrar_solucion</em>&nbsp;</td><td>Callback llamado cada vez que se encuentra una solución </td></tr>
+  </table>
+</dl>
+
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00645">645</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.    </td>
+  </tr>
+</table>
+<a class="anchor" name="gc576de7ced520b771831a409bc671363"></a><!-- doxytag: member="ia::detalle::profundidad_limitada" ref="gc576de7ced520b771831a409bc671363" args="(const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, const unsigned int &amp;limite_profundidad, bool &amp;finalizar, bool(*registrar_solucion)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))" --><p>
+<table class="mdTable" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="mdPrefix" colspan="4">
+template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t&gt; </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap valign="top">Ruta_t ia::detalle::profundidad_limitada           </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const Operaciones_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>operaciones</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>set&lt; Estado_t &gt; &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>visitados</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>Ruta_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>ruta</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>const Estado_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>actual</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>unsigned int&nbsp;</td>
+          <td class="mdname" nowrap> <em>profundidad</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>const unsigned int &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>limite_profundidad</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>bool &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>finalizar</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>bool(*)(const vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)&nbsp;</td>
+          <td class="mdname" nowrap> <em>registrar_solucion</em></td>
+        </tr>
+        <tr>
+          <td class="md"></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing="5" cellpadding="0" border="0">
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Algoritmo de búsqueda por profundidad limitada, es recursivo pero solo tiene una variable Estado_t en el stack, el resto son estáticas. 
+<p>
+<dl compact><dt><b>Parámetros:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>operaciones</em>&nbsp;</td><td>Todas las operaciones disponibles </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>visitados</em>&nbsp;</td><td>Estados que ya se han visitado </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ruta</em>&nbsp;</td><td>Ruta (operaciones realizadas) hasta el estado que se esta explorando </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>actual</em>&nbsp;</td><td>Estado que se esta explorando </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>profundidad</em>&nbsp;</td><td>Profundidad en la que se encuentra el estado actual </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>limite_profundidad</em>&nbsp;</td><td>Profundidad hasta la cual puede explorarse el árbol de estados </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>finalizar</em>&nbsp;</td><td>Vale true ssi es necesario terminar el algoritmo (p.e. el callback indica que se debe detener la búsqueda) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>registrar_solucion</em>&nbsp;</td><td>Callback llamado cada vez que se encuentra una solucion </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Ejemplos: </b></dt><dd>
+<a class="el" href="8puzzle_8cpp-example.html#a3">8puzzle.cpp</a>, <a class="el" href="cantaros_8cpp-example.html#a10">cantaros.cpp</a>, <a class="el" href="pastor_8cpp-example.html#a33">pastor.cpp</a>, <a class="el" href="reinas_8cpp-example.html#a38">reinas.cpp</a>, y <a class="el" href="viajero_8cpp-example.html#a43">viajero.cpp</a>.</dl>
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00500">500</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.
+<p>
+Referenciado por <a class="el" href="ia__ciega_8h-source.html#l00809">ia::profundidad_iterativa()</a>.    </td>
+  </tr>
+</table>
+<a class="anchor" name="gd52da0628461fbda96aac48a75f29122"></a><!-- doxytag: member="ia::detalle::profundidad_limitada_doble" ref="gd52da0628461fbda96aac48a75f29122" args="(const Operaciones_t &amp;operaciones, set&lt; Estado_t &gt; &amp;visitados, Ruta_t &amp;ruta, const Estado_t &amp;actual, unsigned int profundidad, const unsigned int &amp;limite_profundidad, bool &amp;finalizar, SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;atajos, SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;nuevos_atajos, bool(*registrar_solucion)(vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;))" --><p>
+<table class="mdTable" cellpadding="2" cellspacing="0">
+  <tr>
+    <td class="mdRow">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td class="mdPrefix" colspan="4">
+template&lt;typename Estado_t, typename Operaciones_t, typename Ruta_t, typename Comparador_t&gt; </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap valign="top">pair&lt;Ruta_t, bool&gt; ia::detalle::profundidad_limitada_doble           </td>
+          <td class="md" valign="top">(&nbsp;</td>
+          <td class="md" nowrap valign="top">const Operaciones_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>operaciones</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>set&lt; Estado_t &gt; &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>visitados</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>Ruta_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>ruta</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>const Estado_t &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>actual</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>unsigned int&nbsp;</td>
+          <td class="mdname" nowrap> <em>profundidad</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>const unsigned int &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>limite_profundidad</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>bool &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>finalizar</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>atajos</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt; &amp;&nbsp;</td>
+          <td class="mdname" nowrap> <em>nuevos_atajos</em>, </td>
+        </tr>
+        <tr>
+          <td class="md" nowrap align="right"></td>
+          <td class="md"></td>
+          <td class="md" nowrap>bool(*)(vector&lt; typename Operaciones_t::value_type &gt; &amp;, const Estado_t &amp;)&nbsp;</td>
+          <td class="mdname" nowrap> <em>registrar_solucion</em></td>
+        </tr>
+        <tr>
+          <td class="md"></td>
+          <td class="md">)&nbsp;</td>
+          <td class="md" colspan="2"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellspacing="5" cellpadding="0" border="0">
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+
+<p>
+Algoritmo de búsqueda por profundidad limitada doble, es recursivo pero solo tiene una variable Estado_t en el stack, el resto son estáticas. 
+<p>
+<dl compact><dt><b>Parámetros:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>operaciones</em>&nbsp;</td><td>Todas las operaciones disponibles </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>visitados</em>&nbsp;</td><td>Conjunto de estados que ya han sido visitados </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ruta</em>&nbsp;</td><td>Lista de operaciones realizadas para llegar al estado actual que debe explorarse </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>actual</em>&nbsp;</td><td>Estado actual que debe explorarse </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>profundidad</em>&nbsp;</td><td>Profundidad del nodo correspondiente al estado actual </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>limite_profundidad</em>&nbsp;</td><td>Máxima profundidad permisible </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>finalizar</em>&nbsp;</td><td>Vale true ssi la funcion debe terminar ya, p.e. porque el callback así lo indica </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>atajos</em>&nbsp;</td><td>Nodos que se hallan en el nivel más profundo en el arbol alterno (el que se recorre en el otro sentido) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>nuevos_atajos</em>&nbsp;</td><td>Nodos que se hallan en el nivel más profundo de este árbol </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>registrar_solucion</em>&nbsp;</td><td>Callback llamado cada vez que se encuentra una solución </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Ejemplos: </b></dt><dd>
+<a class="el" href="laberinto_8cpp-example.html#a18">laberinto.cpp</a>, y <a class="el" href="laberinto2_8cpp-example.html#a23">laberinto2.cpp</a>.</dl>
+<p>
+Definición en la línea <a class="el" href="ia__ciega_8h-source.html#l00574">574</a> del archivo <a class="el" href="ia__ciega_8h-source.html">ia_ciega.h</a>.
+<p>
+Referenciado por <a class="el" href="ia__ciega_8h-source.html#l00899">ia::profundidad_limitada_doble()</a>.    </td>
+  </tr>
+</table>
+<hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:38 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>

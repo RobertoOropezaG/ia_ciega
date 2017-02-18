@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<title>IA Ciega 0.9: Lista de componentes</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generado por Doxygen 1.4.6-NO -->
+<div class="tabs">
+  <ul>
+    <li><a href="index.html"><span>Página&nbsp;principal</span></a></li>
+    <li><a href="modules.html"><span>Módulos</span></a></li>
+    <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+    <li id="current"><a href="annotated.html"><span>Clases</span></a></li>
+    <li><a href="files.html"><span>Archivos</span></a></li>
+    <li><a href="pages.html"><span>Páginas&nbsp;relacionadas</span></a></li>
+    <li><a href="examples.html"><span>Ejemplos</span></a></li>
+  </ul></div>
+<div class="tabs">
+  <ul>
+    <li id="current"><a href="annotated.html"><span>Lista&nbsp;de&nbsp;componentes</span></a></li>
+    <li><a href="hierarchy.html"><span>Jerarquía&nbsp;de&nbsp;la&nbsp;clase</span></a></li>
+    <li><a href="functions.html"><span>Miembros&nbsp;de&nbsp;las&nbsp;clases</span></a></li>
+  </ul></div>
+<h1>IA Ciega 0.9 Lista de componentes</h1>Lista de las clases, estructuras, uniones e interfaces con una breve descripción:<table>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1detalle_1_1_compara_estados_ignorando_rutas.html">ia::detalle::ComparaEstadosIgnorandoRutas&lt; Estado_t, T &gt;</a></td><td class="indexvalue">Functor auxiliar que compara un par &lt;estado, ruta&gt; tomando en cuenta solamente el estado </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1_enlaces.html">ia::Enlaces&lt; Nodo_t, Iterador_t, Costo_t &gt;</a></td><td class="indexvalue">La estructura de los enlaces del grafo </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1_enlaces_1_1_auxiliar__costo__asignable__t.html">ia::Enlaces&lt; Nodo_t, Iterador_t, Costo_t &gt;::Auxiliar_costo_asignable_t</a></td><td class="indexvalue">Se utiliza para que el usuario pueda asignar el costo a un enlace de manera intuitiva </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1detalle_1_1_estado_y_ruta.html">ia::detalle::EstadoYRuta&lt; Estado_t, Operaciones_t &gt;</a></td><td class="indexvalue">Alias para contener varios estados cada uno con las operaciones realizadas para llegar a él (o sea, su ruta) </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1_grafo.html">ia::Grafo&lt; Nodo_t, Iterador_t, Costo_t &gt;</a></td><td class="indexvalue">La estructura del grafo </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1detalle_1_1_multiset_estado_y_ruta.html">ia::detalle::MultisetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_mejor_t &gt;</a></td><td class="indexvalue">Alias para tener varios estados ordenados de acuerdo a cierto criterio (dado por Comparador_mejor_t), cada uno asociado con las operaciones realizadas para llegar a él (o sea, su ruta) </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1_nombres_operadores.html">ia::NombresOperadores&lt; Estado_t &gt;</a></td><td class="indexvalue">Si se tiene un vector con punteros a funciones para representar las operaciones que se pueden aplicar al realizar las búsquedas, debería instanciar una estructura como esta, dando como parámetro de plantilla el tipo de estado con el que opera </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1_operacion.html">ia::Operacion&lt; Estado_t &gt;</a></td><td class="indexvalue">Las operaciones pueden ser functores (objeto-funcion) que heredan de este, dándole como parámetro de plantilla el tipo del estado con el que opera </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1_operaciones.html">ia::Operaciones&lt; Estado_t &gt;</a></td><td class="indexvalue">La lista de operaciones se puede declarar como una instancia de esta estructura, que es un vector de punteros a las funciones que sirven de operadores </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1_operadores_inversos.html">ia::OperadoresInversos&lt; Operaciones_t &gt;</a></td><td class="indexvalue">Si utiliza las búsquedas bi-direccionales con un vector con punteros a funciones para representar las operaciones que se pueden aplicar al realizar las búsquedas, puede utilizar este mapa para establecer las operaciones inversas </td></tr>
+  <tr><td class="indexkey"><a class="el" href="classia_1_1_secuencia_estados.html">ia::SecuenciaEstados&lt; Estado_t, Operaciones_t &gt;</a></td><td class="indexvalue">Un contenedor que se construye en base al estado inicial y a una secuencia de operadores como las que devuelven las búsquedas; pero que al iterar devuelve los <em>estados</em> generados al aplicar esas operaciones </td></tr>
+  <tr><td class="indexkey"><a class="el" href="classia_1_1_secuencia_estados_1_1iterator.html">ia::SecuenciaEstados&lt; Estado_t, Operaciones_t &gt;::iterator</a></td><td class="indexvalue">Este iterador es el que da al contenedor <a class="el" href="classia_1_1_secuencia_estados.html">SecuenciaEstados</a> todas las características mencionadas en su descripción </td></tr>
+  <tr><td class="indexkey"><a class="el" href="structia_1_1detalle_1_1_set_estado_y_ruta.html">ia::detalle::SetEstadoYRuta&lt; Estado_t, Ruta_t, Comparador_t &gt;</a></td><td class="indexvalue">Alias para tener varios estados ordenados de acuerdo a cierto criterio (dado por Comparador_t), cada uno asociado con las operaciones realizadas para llegar a él (o sea, su ruta) </td></tr>
+</table>
+<hr size="1"><address style="align: right;"><small>Generado el Tue Aug 22 12:21:37 2006 para IA Ciega 0.9 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.6-NO </small></address>
+</body>
+</html>
